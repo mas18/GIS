@@ -9,47 +9,49 @@
     <link rel="stylesheet" href="data/css/control.fullscreen.css" />
     <link rel="stylesheet" href="data/css/leaflet.groupedlayercontrol.min.css" />
     <script src="data/js/control.fullscreen.js"></script>
-    <script src="data/js/leaflet.groupedlayercontrol.min.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
     <script src="data/js/stade-complete.js"></script>
     <script src="data/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
-<div id="map" style="height: 400px; width: 600px">
-<div id="query" style="position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background: white;
-    padding: 1em;" class="leaflet-bar">
-    <label>
-        Ligue:
-        <select id="direction">
-            <!-- make sure to encase string values in single quotes for valid sql -->
-            <option value=""></option>
-            <option value="All">Any</option>
-            <option value="England">Premier League</option>
-            <option value="Spain">Primera Division</option>
-            <option value="Germany">Bundesliga</option>
-            <option value="France">Ligue 1</option>
-            <option value="Italy">Serie A</option>
-            <option value="Switzerland">Super League</option>
-        </select>
-    </label>
+<div id="map" style="height: 600px; width: 800px">
+    <div id="controller" style="position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: white;
+        padding: 1em;" class="leaflet-bar">
+        <label>
+            Ligue:
+            <select id="league">
+                <!-- make sure to encase string values in single quotes for valid sql -->
+                <option value="All">Any</option>
+                <option value="England">Premier League</option>
+                <option value="Spain">Primera Division</option>
+                <option value="Germany">Bundesliga</option>
+                <option value="France">Ligue 1</option>
+                <option value="Italy">Serie A</option>
+                <option value="Switzerland">Super League</option>
+            </select>
+        </label>
+
+        <label>
+            Affichage:
+            <select id="view">
+                <!-- make sure to encase string values in single quotes for valid sql -->
+                <option value="Standard">Normal</option>
+                <option value="Stade-Locations">Locations des Stades</option>
+                <option value="Stade-Size">Grandeur des Stades</option>
+                <option value="Heatmap">Heatmap</option>
+
+            </select>
+        </label>
+    </div>
 </div>
-</div>
-<!--   <select id="combo" style="position: absolute; top: 5px; right: 20px;    ">
-       <option value="EU">All</option>
-       <option value="CH">Suisse</option>
-       <option value="DE">Allemagne</option>
-       <option value="FR">France</option>
-       <option value="EN">Angleterre</option>
-       <option value="ES">Espagne</option>
-       <option value="IT">Italie</option>
-   </select>
--->
 
 <script>
+    // Map
     var map = L.map('map', {
         fullscreenControl: true,
         fullscreenControlOptions: {
@@ -57,23 +59,71 @@
         }
     }).setView([46.368725, 7.312521], 4);
 
+    // Controllers
+    var controlPanel = document.getElementById('controller');
+    var league = document.getElementById('league');
+    var view = document.getElementById('view');
+
+    // Layers
     var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
-
     var clubs;
+    var club_locations;
+    var stade_sizes;
+    var heatmap;
 
-    var direction = document.getElementById('direction');
+    // Bounds
+    var bounds;
 
-    direction.addEventListener('change', function(){
+    // Heatmap data
+    var heatmap_data;
+    var data;
+
+    // Listeners
+    controlPanel.addEventListener('change', function(){
+        removeLayers();
+        getView();
+    });
+
+    // Functions
+    function removeLayers(){
         if(map.hasLayer(clubs)){
             clubs.remove();
+        } else if (map.hasLayer(club_locations)) {
+            club_locations.remove();
+        } else if (map.hasLayer(stade_sizes)) {
+            stade_sizes.remove();
+        } else if (map.hasLayer(heatmap)){
+            heatmap.remove();
+            heatmap_data.remove();
         }
+    }
 
-        if(direction.value != "All") {
+    function getView(){
+        switch (view.value) {
+            case "Standard":
+                standardLayer();
+                break;
+            case "Stade-Locations":
+                locationLayer();
+                break;
+            case "Stade-Size":
+                sizeLayer();
+                break;
+            case "Heatmap":
+                heatmapLayer();
+                break;
+            default:
+                break;
+        }
+    }
+
+    function standardLayer(){
+        if(league.value != "All") {
             clubs = L.geoJson(stadions, {
                 onEachFeature: clubPopup,
                 filter: function (feature, layer) {
-                    return feature.properties.Country_Club === direction.value;
+                    return feature.properties.Country_Club === league.value;
                 }
             }).addTo(map);
         } else {
@@ -81,13 +131,175 @@
                 onEachFeature: clubPopup,
             }).addTo(map);
         }
-        var bounds = clubs.getBounds();
+        bounds = clubs.getBounds();
         map.fitBounds(bounds);
-    });
+    }
+
+    function locationLayer(){
+       switch(league.value) {
+            case "England":
+                $.get('data/geojson/stade-GBR.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+                });
+                break;
+            case "Germany":
+                $.get('data/geojson/stade-DEU.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+                });
+                break;
+            case "Spain":
+                $.get('data/geojson/stade-ESP.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+
+                });
+                break;
+            case "France":
+                $.get('data/geojson/stade-FR.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+                });
+                break;
+            case "Italy":
+                $.get('data/geojson/stade-IT.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+                });
+                break;
+            case "Switzerland":
+                $.get('data/geojson/stade-CH.geojson', function(data) {
+                    club_locations = new L.GeoJSON(data, {
+                        style: style
+                    });
+                    map.addLayer(club_locations);
+                    bounds = club_locations.getBounds();
+                    map.fitBounds(bounds);
+                });
+                break;
+           default:
+               break;
+        }
+
+    }
+
+    function sizeLayer(){
+        if(league.value != "All") {
+            stade_sizes = L.geoJson(stadions, {
+                onEachFuture: clubPopup,
+                pointToLayer: point,
+                filter: function (feature, layer) {
+                    return feature.properties.Country_Club === league.value;
+                }
+            }).addTo(map);
+        } else {
+            stade_sizes = L.geoJson(stadions, {
+                onEachFuture: clubPopup,
+                pointToLayer: point
+            }).addTo(map);
+        }
+
+        bounds = stade_sizes.getBounds();
+        map.fitBounds(bounds);
+    }
+
+    function heatmapLayer(){
+        data = [];
+        if(league.value != "All") {
+            heatmap_data = L.geoJson(stadions, {
+                onEachFeature: manageClubs,
+                filter: function (feature, layer) {
+                    return feature.properties.Country_Club === league.value;
+                }
+            });
+        } else {
+            heatmap_data = L.geoJson(stadions, {
+                onEachFeature: manageClubs
+            });
+        }
+        heatmap = L.heatLayer(data, {radius: 25, blur: 15, maxZoom: 17}).addTo(map);
+
+        bounds = heatmap.getBounds();
+        map.fitBounds(bounds);
+
+    }
+
+    function manageClubs (feature, layer){
+        var point = new Array();
+        point[0] = feature.properties.Latitude;
+        point[1] = feature.properties.Longitude;
+        point[2] = 700;
+        data.push(point);
+    }
+
+    function point(feature, latlng) {
+        var marker = new L.Circle(latlng, geojsonMarkerOptions = {
+            radius: 10,
+            weight: setSize(feature.properties.Capacity),
+            opacity: 0.5
+        });
+
+        return marker;
+    }
+
+    function setSize(capacity) {
+        return capacity / 10000 * 6;
+    }
 
     function clubPopup (feature, layer){
         layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity )
-    };
+    }
+
+
+
+    function getColor(points) {
+        switch(points) {
+            case 0:
+                return "#ffcfd3";
+            case 1:
+                return "#ff5358";
+            case 2:
+                return "#ff000e";
+            case 3:
+                return "#cd0009";
+            case 4:
+                return "#9b0009";
+            case 5:
+                return "#770009";
+        }
+    }
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.NUMPOINTS),
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.7,
+            color: 'black',
+            dashArray: '3'
+        }
+    }
 
 </script>
 </body>
