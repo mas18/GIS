@@ -6,40 +6,89 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="data/css/control.fullscreen.css" />
+    <link rel="stylesheet" href="data/css/leaflet.groupedlayercontrol.min.css" />
+    <script src="data/js/control.fullscreen.js"></script>
+    <script src="data/js/leaflet.groupedlayercontrol.min.js"></script>
     <script src="data/js/stade-complete.js"></script>
     <script src="data/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
-    <div id="map" style="height: 600px; width: 800px;"></div>
-    <div id="clubButton" style="padding: 5px; margin: 5px; position: absolute; right: 20px; top: 5px; cursor: pointer; background-color: black; color: white;"><h3>Clubs</h3></div>
+<div id="map" style="height: 400px; width: 600px">
+<div id="query" style="position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 1em;" class="leaflet-bar">
+    <label>
+        Ligue:
+        <select id="direction">
+            <!-- make sure to encase string values in single quotes for valid sql -->
+            <option value=""></option>
+            <option value="All">Any</option>
+            <option value="England">Premier League</option>
+            <option value="Spain">Primera Division</option>
+            <option value="Germany">Bundesliga</option>
+            <option value="France">Ligue 1</option>
+            <option value="Italy">Serie A</option>
+            <option value="Switzerland">Super League</option>
+        </select>
+    </label>
+</div>
+</div>
+<!--   <select id="combo" style="position: absolute; top: 5px; right: 20px;    ">
+       <option value="EU">All</option>
+       <option value="CH">Suisse</option>
+       <option value="DE">Allemagne</option>
+       <option value="FR">France</option>
+       <option value="EN">Angleterre</option>
+       <option value="ES">Espagne</option>
+       <option value="IT">Italie</option>
+   </select>
+-->
 
-    <script>
-        var map = L.map('map').setView([46.368725, 7.312521], 4);
+<script>
+    var map = L.map('map', {
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }
+    }).setView([46.368725, 7.312521], 4);
 
-        var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        }).addTo(map);
+    var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    }).addTo(map);
 
-        var clubs = L.geoJson(stadions, {
-            onEachFeature: clubPopup
-        }).addTo(map);
+    var clubs;
 
+    var direction = document.getElementById('direction');
 
-
-        function clubPopup (feature, layer){
-            layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity )
+    direction.addEventListener('change', function(){
+        if(map.hasLayer(clubs)){
+            clubs.remove();
         }
 
+        if(direction.value != "All") {
+            clubs = L.geoJson(stadions, {
+                onEachFeature: clubPopup,
+                filter: function (feature, layer) {
+                    return feature.properties.Country_Club === direction.value;
+                }
+            }).addTo(map);
+        } else {
+            clubs = L.geoJson(stadions, {
+                onEachFeature: clubPopup,
+            }).addTo(map);
+        }
+        var bounds = clubs.getBounds();
+        map.fitBounds(bounds);
+    });
 
-        $("#clubButton").click(function(){
+    function clubPopup (feature, layer){
+        layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity )
+    };
 
-            if (map.hasLayer(clubs)){
-                map.removeLayer(clubs)
-            } else {
-                map.addLayer(clubs)
-            }
-        });
-
-    </script>
+</script>
 </body>
 </html>
