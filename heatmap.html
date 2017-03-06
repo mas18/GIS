@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="data/js/jquery-3.1.1.min.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
+    <script src="data/js/stade-complete.js"></script>
+</head>
+<body>
+
+    <div id="map" style="height: 600px; width: 800px;"></div>
+    <div id="clubButton" style="padding: 5px; margin: 5px; position: absolute; right: 20px; top: 5px; cursor: pointer; background-color: black; color: white;"><h3>Clubs</h3></div>
+    <div id="heatButton" style="padding: 5px; margin: 5px; position: absolute; right: 100px; top: 5px; cursor: pointer; background-color: black; color: white;"><h3>Heatmap</h3></div>
+
+    <script>
+        var map = L.map('map').setView([46.368725, 7.312521], 4);
+
+
+
+        var data = [];
+
+        var clubs = L.geoJson(stadions, {
+            onEachFeature: manageClubs
+        });
+
+        function manageClubs (feature, layer){
+            layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity );
+
+            var point = new Array();
+            point[0] = feature.properties.Latitude;
+            point[1] = feature.properties.Longitude;
+            point[2] = 700;
+            data.push(point);
+        }
+
+        $("#clubButton").click(function(){
+
+            if (map.hasLayer(clubs)){
+                map.removeLayer(clubs);
+            } else {
+                map.addLayer(clubs);
+            }
+        });
+
+        $("#heatButton").click(function(){
+
+            if (map.hasLayer(heat)){
+                map.removeLayer(heat);
+            } else {
+                map.addLayer(heat);
+            }
+        });
+
+        var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
+        var heat = L.heatLayer(data, {radius: 25, blur: 15, maxZoom: 17}).addTo(map);
+
+    </script>
+</body>
+</html>
