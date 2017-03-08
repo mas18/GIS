@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="data/js/jquery-3.1.1.min.js"></script>
-    <script src="data/js/leaflet-heat.js"></script>
-    <script src="data/js/stade-complete.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
@@ -17,38 +13,37 @@
 </head>
 <body>
 
-<canvas id="oldestClub" width="800" height="450" style="float:left;"></canvas>
-<canvas id="youngestClub" width="800" height="450" style="float:left;"></canvas>
-<canvas id="averageClub" width="450" height="450" style="float:left;"></canvas>
+<canvas id="oldestClub" width="600" height="200" style="float:left;"></canvas>
+<canvas id="youngestClub" width="600" height="200" style="float:left;"></canvas>
+<canvas id="averageClub" width="600" height="200" style="float:left;"></canvas>
 
 <script>
 
-    // Any of the following formats may be used
-    var oldestClub = document.getElementById("oldestClub");
-    var youngestClub = document.getElementById("youngestClub");
-    var averageClub = document.getElementById("averageClub");
+    $.get('data/geojson/stade-complete.geojson', function(data) {
 
-    var options = {
-        animation: {
-            duration:1500
-        },
-        responsive:false,
-        maintainAspectRatio: false
-    };
+        var oldestClub = document.getElementById("oldestClub");
+        var youngestClub = document.getElementById("youngestClub");
+        var averageClub = document.getElementById("averageClub");
 
-    var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000];
-    var oldestClubs = ["", "", "", "", "", ""];
-    var youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
-    var youngestClubs = ["", "", "", "", "", ""];
-    var englandAverage = new Array();
-    var franceAverage = new Array();
-    var spainAverage = new Array();
-    var italyAverage = new Array();
-    var germanyAverage = new Array();
-    var switzerlandAverage = new Array();
-    var averageValues = [0, 0, 0, 0, 0, 0];
+        var options = {
+            animation: {
+                duration:1500
+            },
+            responsive:false,
+            maintainAspectRatio: false
+        };
 
-    $.get('data/geojson/stade-complete-modif.geojson', function(data) {
+        var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000];
+        var oldestClubs = ["", "", "", "", "", ""];
+        var youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var youngestClubs = ["", "", "", "", "", ""];
+        var englandAverage = new Array();
+        var franceAverage = new Array();
+        var spainAverage = new Array();
+        var italyAverage = new Array();
+        var germanyAverage = new Array();
+        var switzerlandAverage = new Array();
+        var averageValues = [0, 0, 0, 0, 0, 0];
 
         $.each(data.features, function (key, val) {
 
@@ -192,7 +187,7 @@
         });
 
         var averageClubChart = new Chart(averageClub, {
-            type: 'bar',
+            type: 'horizontalBar',
             data: {
                 labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
                 datasets: [{

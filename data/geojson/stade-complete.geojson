@@ -4,14 +4,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row0",
-        "Club Name": "Arsenal Football Club",
+        "row_ID": "Row0",
+        "Club_Name": "Arsenal Football Club",
         "Formed": 1886,
         "Ground": "Emirates Stadium",
         "Capacity": 60260,
         "Manager": "Arsène Wenger",
         "Country": "England",
-        "combined string": "Emirates Stadium England",
+        "combined_string": "Emirates Stadium England",
         "coordinate": "51.55572979999999 -0.1083118",
         "Latitude": 51.5557298,
         "Longitude": -0.1083118
@@ -27,14 +27,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row1",
-        "Club Name": "Bournemouth & Boscombe Athletic Community Football Club",
+        "row_ID": "Row1",
+        "Club_Name": "Bournemouth & Boscombe Athletic Community Football Club",
         "Formed": 1899,
         "Ground": "Vitality Stadium",
         "Capacity": 11464,
         "Manager": "Eddie Howe",
         "Country": "England",
-        "combined string": "Vitality Stadium England",
+        "combined_string": "Vitality Stadium England",
         "coordinate": "50.73523059999999 -1.8382791",
         "Latitude": 50.7352306,
         "Longitude": -1.8382791
@@ -50,14 +50,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row2",
-        "Club Name": "Burnley Football Club",
+        "row_ID": "Row2",
+        "Club_Name": "Burnley Football Club",
         "Formed": 1882,
         "Ground": "Turf Moor",
         "Capacity": 21401,
         "Manager": "Sean Dyche",
         "Country": "England",
-        "combined string": "Turf Moor England",
+        "combined_string": "Turf Moor England",
         "coordinate": "53.7890244 -2.2301736",
         "Latitude": 53.7890244,
         "Longitude": -2.2301736
@@ -73,14 +73,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row3",
-        "Club Name": "Chelsea Football Club",
+        "row_ID": "Row3",
+        "Club_Name": "Chelsea Football Club",
         "Formed": 1905,
         "Ground": "Stamford Bridge",
         "Capacity": 41631,
         "Manager": "Antonio Conte",
         "Country": "England",
-        "combined string": "Stamford Bridge England",
+        "combined_string": "Stamford Bridge England",
         "coordinate": "51.481650 -0.190978",
         "Latitude": 51.48165,
         "Longitude": -0.190978
@@ -96,14 +96,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row4",
-        "Club Name": "Crystal Palace Football Club",
+        "row_ID": "Row4",
+        "Club_Name": "Crystal Palace Football Club",
         "Formed": 1905,
         "Ground": "Selhurst Park",
         "Capacity": 25456,
         "Manager": "Sam Allardyce",
         "Country": "England",
-        "combined string": "Selhurst Park England",
+        "combined_string": "Selhurst Park England",
         "coordinate": "51.3983058 -0.08657020000000001",
         "Latitude": 51.3983058,
         "Longitude": -0.0865702
@@ -119,14 +119,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row5",
-        "Club Name": "Everton Football Club",
+        "row_ID": "Row5",
+        "Club_Name": "Everton Football Club",
         "Formed": 1878,
         "Ground": "Goodison Park",
         "Capacity": 39571,
         "Manager": "Ronald Koeman",
         "Country": "England",
-        "combined string": "Goodison Park England",
+        "combined_string": "Goodison Park England",
         "coordinate": "53.438787 -2.9663193",
         "Latitude": 53.438787,
         "Longitude": -2.9663193
@@ -142,14 +142,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row6",
-        "Club Name": "Hull City Association Football Club",
+        "row_ID": "Row6",
+        "Club_Name": "Hull City Association Football Club",
         "Formed": 1904,
         "Ground": "KCOM Stadium",
         "Capacity": 24983,
         "Manager": "Marco Silva",
         "Country": "England",
-        "combined string": "KCOM Stadium England",
+        "combined_string": "KCOM Stadium England",
         "coordinate": "53.7458812 -0.3685462",
         "Latitude": 53.7458812,
         "Longitude": -0.3685462
@@ -165,14 +165,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row7",
-        "Club Name": "Leicester City Football Club",
+        "row_ID": "Row7",
+        "Club_Name": "Leicester City Football Club",
         "Formed": 1884,
         "Ground": "King Power Stadium",
         "Capacity": 32273,
         "Manager": "Claudio Ranieri",
         "Country": "England",
-        "combined string": "King Power Stadium England",
+        "combined_string": "King Power Stadium England",
         "coordinate": "52.6203693 -1.1421815",
         "Latitude": 52.6203693,
         "Longitude": -1.1421815
@@ -188,14 +188,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row8",
-        "Club Name": "Liverpool Football Club",
+        "row_ID": "Row8",
+        "Club_Name": "Liverpool Football Club",
         "Formed": 1892,
         "Ground": "Anfield",
         "Capacity": 54074,
         "Manager": "Jürgen Klopp",
         "Country": "England",
-        "combined string": "Anfield England",
+        "combined_string": "Anfield England",
         "coordinate": "53.4308294 -2.96083",
         "Latitude": 53.4308294,
         "Longitude": -2.96083
@@ -211,14 +211,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row9",
-        "Club Name": "Manchester City Football Club",
+        "row_ID": "Row9",
+        "Club_Name": "Manchester City Football Club",
         "Formed": 1887,
         "Ground": "Etihad Stadium",
         "Capacity": 55097,
         "Manager": "Josep Guardiola",
         "Country": "England",
-        "combined string": "Etihad Stadium England",
+        "combined_string": "Etihad Stadium England",
         "coordinate": "53.48313810000001 -2.2003953",
         "Latitude": 53.4831381,
         "Longitude": -2.2003953
@@ -234,14 +234,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row10",
-        "Club Name": "Manchester United Football Club",
+        "row_ID": "Row10",
+        "Club_Name": "Manchester United Football Club",
         "Formed": 1878,
         "Ground": "Old Trafford",
         "Capacity": 75653,
         "Manager": "José Mourinho",
         "Country": "England",
-        "combined string": "Old Trafford England",
+        "combined_string": "Old Trafford England",
         "coordinate": "53.463078 -2.291383",
         "Latitude": 53.463078,
         "Longitude": -2.291383
@@ -257,14 +257,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row11",
-        "Club Name": "Middlesbrough Football Club",
+        "row_ID": "Row11",
+        "Club_Name": "Middlesbrough Football Club",
         "Formed": 1876,
         "Ground": "Riverside Stadium",
         "Capacity": 33746,
         "Manager": "Aitor Karanka",
         "Country": "England",
-        "combined string": "Riverside Stadium England",
+        "combined_string": "Riverside Stadium England",
         "coordinate": "54.5779685 -1.2181654",
         "Latitude": 54.5779685,
         "Longitude": -1.2181654
@@ -280,14 +280,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row12",
-        "Club Name": "Southampton Football Club",
+        "row_ID": "Row12",
+        "Club_Name": "Southampton Football Club",
         "Formed": 1885,
         "Ground": "St Mary's Stadium",
         "Capacity": 32384,
         "Manager": "Claude Puel",
         "Country": "England",
-        "combined string": "St Mary's Stadium England",
+        "combined_string": "St Mary's Stadium England",
         "coordinate": "50.9058218 -1.390954",
         "Latitude": 50.9058218,
         "Longitude": -1.390954
@@ -303,14 +303,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row13",
-        "Club Name": "Stoke City Football Club",
+        "row_ID": "Row13",
+        "Club_Name": "Stoke City Football Club",
         "Formed": 1863,
         "Ground": "bet365 Stadium",
         "Capacity": 27932,
         "Manager": "Mark Hughes",
         "Country": "England",
-        "combined string": "bet365 Stadium England",
+        "combined_string": "bet365 Stadium England",
         "coordinate": "52.9880739 -2.1766337",
         "Latitude": 52.9880739,
         "Longitude": -2.1766337
@@ -326,14 +326,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row14",
-        "Club Name": "Sunderland Association Football Club",
+        "row_ID": "Row14",
+        "Club_Name": "Sunderland Association Football Club",
         "Formed": 1879,
         "Ground": "Sunderland Stadium of Light",
         "Capacity": 48707,
         "Manager": "David Moyes",
         "Country": "England",
-        "combined string": "Sunderland Stadium of Light England",
+        "combined_string": "Sunderland Stadium of Light England",
         "coordinate": "54.914561 -1.388371",
         "Latitude": 54.914561,
         "Longitude": -1.388371
@@ -349,14 +349,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row15",
-        "Club Name": "Swansea City Association Football Club",
+        "row_ID": "Row15",
+        "Club_Name": "Swansea City Association Football Club",
         "Formed": 1912,
         "Ground": "Liberty Stadium",
         "Capacity": 21088,
         "Manager": "Paul Clement",
         "Country": "England",
-        "combined string": "Liberty Stadium England",
+        "combined_string": "Liberty Stadium England",
         "coordinate": "51.6427499 -3.9345855",
         "Latitude": 51.6427499,
         "Longitude": -3.9345855
@@ -372,14 +372,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row16",
-        "Club Name": "Tottenham Hotspur Football Club",
+        "row_ID": "Row16",
+        "Club_Name": "Tottenham Hotspur Football Club",
         "Formed": 1882,
         "Ground": "White Hart Lane",
         "Capacity": 36284,
         "Manager": "Mauricio Pchettino",
         "Country": "England",
-        "combined string": "White Hart Lane England",
+        "combined_string": "White Hart Lane England",
         "coordinate": "51.6032123 -0.0657389",
         "Latitude": 51.6032123,
         "Longitude": -0.0657389
@@ -395,14 +395,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row17",
-        "Club Name": "Watford Football Club",
+        "row_ID": "Row17",
+        "Club_Name": "Watford Football Club",
         "Formed": 1881,
         "Ground": "Vicarage Road Stadium",
         "Capacity": 21438,
         "Manager": "Walter Mazzarri",
         "Country": "England",
-        "combined string": "Vicarage Road Stadium England",
+        "combined_string": "Vicarage Road Stadium England",
         "coordinate": "51.6499828 -0.4016876",
         "Latitude": 51.6499828,
         "Longitude": -0.4016876
@@ -418,14 +418,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row18",
-        "Club Name": "West Bromwich Albion Football Club",
+        "row_ID": "Row18",
+        "Club_Name": "West Bromwich Albion Football Club",
         "Formed": 1878,
         "Ground": "The Hawthorns",
         "Capacity": 26850,
         "Manager": "Tony Pulis",
         "Country": "England",
-        "combined string": "The Hawthorns England",
+        "combined_string": "The Hawthorns England",
         "coordinate": "52.509049 -1.963943",
         "Latitude": 52.509049,
         "Longitude": -1.963943
@@ -441,14 +441,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row19",
-        "Club Name": "West Ham United Football",
+        "row_ID": "Row19",
+        "Club_Name": "West Ham United Football",
         "Formed": 1895,
         "Ground": "London Stadium",
         "Capacity": 60000,
         "Manager": "Slaven Bili?",
         "Country": "England",
-        "combined string": "London Stadium England",
+        "combined_string": "London Stadium England",
         "coordinate": "51.5386466 -0.016525",
         "Latitude": 51.5386466,
         "Longitude": -0.016525
@@ -464,14 +464,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row20",
-        "Club Name": "Deportivo Alavés",
+        "row_ID": "Row20",
+        "Club_Name": "Deportivo Alavés",
         "Formed": 1921,
         "Ground": "Mendizorroza",
         "Capacity": 19840,
         "Manager": "Mauricio Pellegrino",
         "Country": "Spain",
-        "combined string": "Mendizorroza Spain",
+        "combined_string": "Mendizorroza Spain",
         "coordinate": "42.8371821 -2.6880434",
         "Latitude": 42.8371821,
         "Longitude": -2.6880434
@@ -487,14 +487,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row21",
-        "Club Name": "Athletic Club de Bilbao",
+        "row_ID": "Row21",
+        "Club_Name": "Athletic Club de Bilbao",
         "Formed": 1898,
         "Ground": "San Mamés",
         "Capacity": 53332,
         "Manager": "Ernesto Valverde",
         "Country": "Spain",
-        "combined string": "San Mamés Spain",
+        "combined_string": "San Mamés Spain",
         "coordinate": "43.2642396 -2.9494213",
         "Latitude": 43.2642396,
         "Longitude": -2.9494213
@@ -510,14 +510,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row22",
-        "Club Name": "Club Atlético de Madrid",
+        "row_ID": "Row22",
+        "Club_Name": "Club Atlético de Madrid",
         "Formed": 1903,
         "Ground": "Vicente Calderón",
         "Capacity": 54907,
         "Manager": "Diego Simeone",
         "Country": "Spain",
-        "combined string": "Vicente Calderón Spain",
+        "combined_string": "Vicente Calderón Spain",
         "coordinate": "40.4017243 -3.7206352",
         "Latitude": 40.4017243,
         "Longitude": -3.7206352
@@ -533,14 +533,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row23",
-        "Club Name": "Fútbol Club Barcelona",
+        "row_ID": "Row23",
+        "Club_Name": "Fútbol Club Barcelona",
         "Formed": 1899,
         "Ground": "Camp Nou",
         "Capacity": 99354,
         "Manager": "Luis Enrique",
         "Country": "Spain",
-        "combined string": "Camp Nou Spain",
+        "combined_string": "Camp Nou Spain",
         "coordinate": "41.380896 2.1228198",
         "Latitude": 41.380896,
         "Longitude": 2.1228198
@@ -556,14 +556,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row24",
-        "Club Name": "Real Betis Balompié",
+        "row_ID": "Row24",
+        "Club_Name": "Real Betis Balompié",
         "Formed": 1907,
         "Ground": "Benito Villamarin",
         "Capacity": 52500,
         "Manager": "Victor Sánchez del Amo",
         "Country": "Spain",
-        "combined string": "Benito Villamarin Spain",
+        "combined_string": "Benito Villamarin Spain",
         "coordinate": "37.3565037 -5.9817521",
         "Latitude": 37.3565037,
         "Longitude": -5.9817521
@@ -579,14 +579,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row25",
-        "Club Name": "Real Club Celta de Vigo",
+        "row_ID": "Row25",
+        "Club_Name": "Real Club Celta de Vigo",
         "Formed": 1923,
         "Ground": "Estadio Balaidos",
         "Capacity": 29000,
         "Manager": "Eduardo Berizzo",
         "Country": "Spain",
-        "combined string": "Estadio Balaidos Spain",
+        "combined_string": "Estadio Balaidos Spain",
         "coordinate": "42.2118537 -8.739719899999999",
         "Latitude": 42.2118537,
         "Longitude": -8.7397199
@@ -602,14 +602,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row26",
-        "Club Name": "Real Club Deportivo de La Coruña",
+        "row_ID": "Row26",
+        "Club_Name": "Real Club Deportivo de La Coruña",
         "Formed": 1906,
         "Ground": "Riazor",
         "Capacity": 34600,
         "Manager": "Gaizka Garitano",
         "Country": "Spain",
-        "combined string": "Riazor Spain",
+        "combined_string": "Riazor Spain",
         "coordinate": "43.3687184 -8.4174835",
         "Latitude": 43.3687184,
         "Longitude": -8.4174835
@@ -625,14 +625,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row27",
-        "Club Name": "Sociedad Deportiva Eibar",
+        "row_ID": "Row27",
+        "Club_Name": "Sociedad Deportiva Eibar",
         "Formed": 1940,
         "Ground": "Municipal de Ipurúa",
         "Capacity": 6267,
         "Manager": "José Luis Mendilibar",
         "Country": "Spain",
-        "combined string": "Municipal de Ipurúa Spain",
+        "combined_string": "Municipal de Ipurúa Spain",
         "coordinate": "43.1817331 -2.4762534",
         "Latitude": 43.1817331,
         "Longitude": -2.4762534
@@ -648,14 +648,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row28",
-        "Club Name": "Reial Club Deportiu Espanyol de Barcelona",
+        "row_ID": "Row28",
+        "Club_Name": "Reial Club Deportiu Espanyol de Barcelona",
         "Formed": 1900,
         "Ground": "Cornellà-el Prat",
         "Capacity": 40500,
         "Manager": "Quique Sánchez Flores",
         "Country": "Spain",
-        "combined string": "Cornellà-el Prat Spain",
+        "combined_string": "Cornellà-el Prat Spain",
         "coordinate": "41.34797349999999 2.0747653",
         "Latitude": 41.3479735,
         "Longitude": 2.0747653
@@ -671,14 +671,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row29",
-        "Club Name": "Granada Club de Fútbol",
+        "row_ID": "Row29",
+        "Club_Name": "Granada Club de Fútbol",
         "Formed": 1931,
         "Ground": "Nuevo Los Cármenes",
         "Capacity": 23369,
         "Manager": "Lucas Alcaraz",
         "Country": "Spain",
-        "combined string": "Nuevo Los Cármenes Spain",
+        "combined_string": "Nuevo Los Cármenes Spain",
         "coordinate": "37.152892 -3.5956996",
         "Latitude": 37.152892,
         "Longitude": -3.5956996
@@ -694,14 +694,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row30",
-        "Club Name": "Unión Deportiva Las Palmas",
+        "row_ID": "Row30",
+        "Club_Name": "Unión Deportiva Las Palmas",
         "Formed": 1949,
         "Ground": "Estadio de Gran Canaria",
         "Capacity": 31250,
         "Manager": "Quique Setién",
         "Country": "Spain",
-        "combined string": "Estadio de Gran Canaria Spain",
+        "combined_string": "Estadio de Gran Canaria Spain",
         "coordinate": "28.1004063 -15.4567456",
         "Latitude": 28.1004063,
         "Longitude": -15.4567456
@@ -717,14 +717,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row31",
-        "Club Name": "Club Deportivo Leganés",
+        "row_ID": "Row31",
+        "Club_Name": "Club Deportivo Leganés",
         "Formed": 1928,
         "Ground": "Estadio Municipal de Butarque",
         "Capacity": 8138,
         "Manager": "Asier Garitano",
         "Country": "Spain",
-        "combined string": "Estadio Municipal de Butarque Spain",
+        "combined_string": "Estadio Municipal de Butarque Spain",
         "coordinate": "40.34051669999999 -3.7603744",
         "Latitude": 40.3405167,
         "Longitude": -3.7603744
@@ -740,14 +740,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row32",
-        "Club Name": "Málaga Club de Fútbol",
+        "row_ID": "Row32",
+        "Club_Name": "Málaga Club de Fútbol",
         "Formed": 1948,
         "Ground": "La Rosaleda",
         "Capacity": 30044,
         "Manager": "Marcelo Romero",
         "Country": "Spain",
-        "combined string": "La Rosaleda Spain",
+        "combined_string": "La Rosaleda Spain",
         "coordinate": "36.7355448 -4.426569",
         "Latitude": 36.7355448,
         "Longitude": -4.426569
@@ -763,14 +763,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row33",
-        "Club Name": "Club Atlético Osasuna",
+        "row_ID": "Row33",
+        "Club_Name": "Club Atlético Osasuna",
         "Formed": 1920,
         "Ground": "El Sadar",
         "Capacity": 19800,
         "Manager": "Petar Vasiljevi?",
         "Country": "Spain",
-        "combined string": "El Sadar Spain",
+        "combined_string": "El Sadar Spain",
         "coordinate": "42.7966922 -1.6371164",
         "Latitude": 42.7966922,
         "Longitude": -1.6371164
@@ -786,14 +786,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row34",
-        "Club Name": "Real Madrid Club de Fútbol",
+        "row_ID": "Row34",
+        "Club_Name": "Real Madrid Club de Fútbol",
         "Formed": 1902,
         "Ground": "Santiago Bernabéu",
         "Capacity": 81044,
         "Manager": "Zinédine Zidane",
         "Country": "Spain",
-        "combined string": "Santiago Bernabéu Spain",
+        "combined_string": "Santiago Bernabéu Spain",
         "coordinate": "40.4530541 -3.6883445",
         "Latitude": 40.4530541,
         "Longitude": -3.6883445
@@ -809,14 +809,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row35",
-        "Club Name": "Real Sociedad de Fútbol",
+        "row_ID": "Row35",
+        "Club_Name": "Real Sociedad de Fútbol",
         "Formed": 1909,
         "Ground": "Anoeta",
         "Capacity": 32076,
         "Manager": "Eusebio Sacristán",
         "Country": "Spain",
-        "combined string": "Anoeta Spain",
+        "combined_string": "Anoeta Spain",
         "coordinate": "43.30139339999999 -1.973682",
         "Latitude": 43.3013934,
         "Longitude": -1.973682
@@ -832,14 +832,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row36",
-        "Club Name": "Sevilla Fútbol Club",
+        "row_ID": "Row36",
+        "Club_Name": "Sevilla Fútbol Club",
         "Formed": 1905,
         "Ground": "Ramón Sánchez Pizjuán",
         "Capacity": 45500,
         "Manager": "Jorge Sampaoli",
         "Country": "Spain",
-        "combined string": "Ramón Sánchez Pizjuán Spain",
+        "combined_string": "Ramón Sánchez Pizjuán Spain",
         "coordinate": "37.3840655 -5.9706902",
         "Latitude": 37.3840655,
         "Longitude": -5.9706902
@@ -855,14 +855,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row37",
-        "Club Name": "Real Sporting de Gijón",
+        "row_ID": "Row37",
+        "Club_Name": "Real Sporting de Gijón",
         "Formed": 1905,
         "Ground": "El Molinón",
         "Capacity": 30000,
         "Manager": "Rubi",
         "Country": "Spain",
-        "combined string": "El Molinón Spain",
+        "combined_string": "El Molinón Spain",
         "coordinate": "43.53618729999999 -5.6374561",
         "Latitude": 43.5361873,
         "Longitude": -5.6374561
@@ -878,14 +878,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row38",
-        "Club Name": "Valencia Club de Fútbol",
+        "row_ID": "Row38",
+        "Club_Name": "Valencia Club de Fútbol",
         "Formed": 1919,
         "Ground": "Mestalla",
         "Capacity": 55000,
         "Manager": "Voro",
         "Country": "Spain",
-        "combined string": "Mestalla Spain",
+        "combined_string": "Mestalla Spain",
         "coordinate": "39.4746042 -0.358225",
         "Latitude": 39.4746042,
         "Longitude": -0.358225
@@ -901,14 +901,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row39",
-        "Club Name": "Villarreal Club de Fútbol",
+        "row_ID": "Row39",
+        "Club_Name": "Villarreal Club de Fútbol",
         "Formed": 1923,
         "Ground": "Estadio de la Cerámica",
         "Capacity": 24500,
         "Manager": "Fran Escribá",
         "Country": "Spain",
-        "combined string": "Estadio de la Cerámica Spain",
+        "combined_string": "Estadio de la Cerámica Spain",
         "coordinate": "39.9441038 -0.1034635",
         "Latitude": 39.9441038,
         "Longitude": -0.1034635
@@ -924,14 +924,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row40",
-        "Club Name": "Fußball-Club Augsburg 1907",
+        "row_ID": "Row40",
+        "Club_Name": "Fußball-Club Augsburg 1907",
         "Formed": 1907,
         "Ground": "WWK Arena",
         "Capacity": 30660,
         "Manager": "Manuel Baum",
         "Country": "Germany",
-        "combined string": "WWK Arena Germany",
+        "combined_string": "WWK Arena Germany",
         "coordinate": "48.3231985 10.8860389",
         "Latitude": 48.3231985,
         "Longitude": 10.8860389
@@ -947,14 +947,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row41",
-        "Club Name": "Turn- und Sportverein Bayer 04 Leverkusen",
+        "row_ID": "Row41",
+        "Club_Name": "Turn- und Sportverein Bayer 04 Leverkusen",
         "Formed": 1904,
         "Ground": "BayArena Leverkusen",
         "Capacity": 30210,
         "Manager": "Roger Schmidt",
         "Country": "Germany",
-        "combined string": "BayArena Leverkusen Germany",
+        "combined_string": "BayArena Leverkusen Germany",
         "coordinate": "51.0382091 7.0022566",
         "Latitude": 51.0382091,
         "Longitude": 7.0022566
@@ -970,14 +970,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row42",
-        "Club Name": "Fußball Club Bayern München",
+        "row_ID": "Row42",
+        "Club_Name": "Fußball Club Bayern München",
         "Formed": 1900,
         "Ground": "Allianz Arena",
         "Capacity": 75024,
         "Manager": "Carlo Ancelotti",
         "Country": "Germany",
-        "combined string": "Allianz Arena Germany",
+        "combined_string": "Allianz Arena Germany",
         "coordinate": "48.2187997 11.6247072",
         "Latitude": 48.2187997,
         "Longitude": 11.6247072
@@ -993,14 +993,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row43",
-        "Club Name": "Ballspielverein Borussia 1909 Dortmund",
+        "row_ID": "Row43",
+        "Club_Name": "Ballspielverein Borussia 1909 Dortmund",
         "Formed": 1909,
         "Ground": "Signal Iduna Park",
         "Capacity": 81359,
         "Manager": "Thomas Tuchel",
         "Country": "Germany",
-        "combined string": "Signal Iduna Park Germany",
+        "combined_string": "Signal Iduna Park Germany",
         "coordinate": "51.4925888 7.451857400000001",
         "Latitude": 51.4925888,
         "Longitude": 7.4518574
@@ -1016,14 +1016,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row44",
-        "Club Name": "Borussia Verein für Leibesübungen 1900 Mönchengladbach",
+        "row_ID": "Row44",
+        "Club_Name": "Borussia Verein für Leibesübungen 1900 Mönchengladbach",
         "Formed": 1900,
         "Ground": "Borussia-Park",
         "Capacity": 54067,
         "Manager": "Dieter Hecking",
         "Country": "Germany",
-        "combined string": "Borussia-Park Germany",
+        "combined_string": "Borussia-Park Germany",
         "coordinate": "51.1745698 6.3855055",
         "Latitude": 51.1745698,
         "Longitude": 6.3855055
@@ -1039,14 +1039,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row45",
-        "Club Name": "Sportverein Darmstadt 1898",
+        "row_ID": "Row45",
+        "Club_Name": "Sportverein Darmstadt 1898",
         "Formed": 1898,
         "Ground": "Jonathan-Heimes-Stadion am Böllenfalltor",
         "Capacity": 17000,
         "Manager": "Ramon Berndroth",
         "Country": "Germany",
-        "combined string": "Jonathan-Heimes-Stadion am Böllenfalltor Germany",
+        "combined_string": "Jonathan-Heimes-Stadion am Böllenfalltor Germany",
         "coordinate": "49.857722 8.6723778",
         "Latitude": 49.857722,
         "Longitude": 8.6723778
@@ -1062,14 +1062,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row46",
-        "Club Name": "Eintracht Frankfurt",
+        "row_ID": "Row46",
+        "Club_Name": "Eintracht Frankfurt",
         "Formed": 1899,
         "Ground": "Commerzbank-Arena",
         "Capacity": 51500,
         "Manager": "Niko Kova?",
         "Country": "Germany",
-        "combined string": "Commerzbank-Arena Germany",
+        "combined_string": "Commerzbank-Arena Germany",
         "coordinate": "50.0685807 8.645472",
         "Latitude": 50.0685807,
         "Longitude": 8.645472
@@ -1085,14 +1085,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row47",
-        "Club Name": "Sport-Club Freiburg",
+        "row_ID": "Row47",
+        "Club_Name": "Sport-Club Freiburg",
         "Formed": 1904,
         "Ground": "Schwarzwald-Stadion",
         "Capacity": 24000,
         "Manager": "Christian Streich",
         "Country": "Germany",
-        "combined string": "Schwarzwald-Stadion Germany",
+        "combined_string": "Schwarzwald-Stadion Germany",
         "coordinate": "47.9889632 7.892996600000001",
         "Latitude": 47.9889632,
         "Longitude": 7.8929966
@@ -1108,14 +1108,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row48",
-        "Club Name": "Hamburger Sport Verein",
+        "row_ID": "Row48",
+        "Club_Name": "Hamburger Sport Verein",
         "Formed": 1887,
         "Ground": "Volksparkstadion",
         "Capacity": 57000,
         "Manager": "Markus Gisdol",
         "Country": "Germany",
-        "combined string": "Volksparkstadion Germany",
+        "combined_string": "Volksparkstadion Germany",
         "coordinate": "53.5871279 9.8986004",
         "Latitude": 53.5871279,
         "Longitude": 9.8986004
@@ -1131,14 +1131,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row49",
-        "Club Name": "Hertha Berliner Sport Club",
+        "row_ID": "Row49",
+        "Club_Name": "Hertha Berliner Sport Club",
         "Formed": 1892,
         "Ground": "Berliner Olympiastadion",
         "Capacity": 74649,
         "Manager": "Pál Dárdai",
         "Country": "Germany",
-        "combined string": "Berliner Olympiastadion Germany",
+        "combined_string": "Berliner Olympiastadion Germany",
         "coordinate": "52.5146971 13.2394986",
         "Latitude": 52.5146971,
         "Longitude": 13.2394986
@@ -1154,14 +1154,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row50",
-        "Club Name": "Turn- und Sportgemeinschaft 1899 Hoffenheim",
+        "row_ID": "Row50",
+        "Club_Name": "Turn- und Sportgemeinschaft 1899 Hoffenheim",
         "Formed": 1899,
         "Ground": "Wirsol Rhein-Neckar-Arena",
         "Capacity": 30150,
         "Manager": "Julian Nagelsmann",
         "Country": "Germany",
-        "combined string": "Wirsol Rhein-Neckar-Arena Germany",
+        "combined_string": "Wirsol Rhein-Neckar-Arena Germany",
         "coordinate": "49.238049 8.887691799999999",
         "Latitude": 49.238049,
         "Longitude": 8.8876918
@@ -1177,14 +1177,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row51",
-        "Club Name": "Fußball Club Ingolstadt 04",
+        "row_ID": "Row51",
+        "Club_Name": "Fußball Club Ingolstadt 04",
         "Formed": 2004,
         "Ground": "Audi-Sportpark",
         "Capacity": 15800,
         "Manager": "Maik Walpurgis",
         "Country": "Germany",
-        "combined string": "Audi-Sportpark Germany",
+        "combined_string": "Audi-Sportpark Germany",
         "coordinate": "48.745548 11.4857571",
         "Latitude": 48.745548,
         "Longitude": 11.4857571
@@ -1200,14 +1200,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row52",
-        "Club Name": "1. Fußball-Club Köln",
+        "row_ID": "Row52",
+        "Club_Name": "1. Fußball-Club Köln",
         "Formed": 1948,
         "Ground": "RheinEnergieStadion",
         "Capacity": 49968,
         "Manager": "Peter Stöger",
         "Country": "Germany",
-        "combined string": "RheinEnergieStadion Germany",
+        "combined_string": "RheinEnergieStadion Germany",
         "coordinate": "50.93346090000001 6.8751545",
         "Latitude": 50.9334609,
         "Longitude": 6.8751545
@@ -1223,14 +1223,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row53",
-        "Club Name": "RasenBallsport Leipzig",
+        "row_ID": "Row53",
+        "Club_Name": "RasenBallsport Leipzig",
         "Formed": 2009,
         "Ground": "Red Bull Arena",
         "Capacity": 44345,
         "Manager": "Ralph Hasenhüttl",
         "Country": "Germany",
-        "combined string": "Red Bull Arena Germany",
+        "combined_string": "Red Bull Arena Germany",
         "coordinate": "51.3458312 12.3482747",
         "Latitude": 51.3458312,
         "Longitude": 12.3482747
@@ -1246,14 +1246,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row54",
-        "Club Name": "1. Fußball-und Sportverein Mainz 05",
+        "row_ID": "Row54",
+        "Club_Name": "1. Fußball-und Sportverein Mainz 05",
         "Formed": 1905,
         "Ground": "Opel Arena",
         "Capacity": 34034,
         "Manager": "Martin Schmidt",
         "Country": "Germany",
-        "combined string": "Opel Arena Germany",
+        "combined_string": "Opel Arena Germany",
         "coordinate": "49.9839442 8.2243816",
         "Latitude": 49.9839442,
         "Longitude": 8.2243816
@@ -1269,14 +1269,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row55",
-        "Club Name": "Fußball-Club Gelsenkirchen-Schalke 04",
+        "row_ID": "Row55",
+        "Club_Name": "Fußball-Club Gelsenkirchen-Schalke 04",
         "Formed": 1904,
         "Ground": "VeltinsArena",
         "Capacity": 62271,
         "Manager": "Markus Weinzierl",
         "Country": "Germany",
-        "combined string": "VeltinsArena Germany",
+        "combined_string": "VeltinsArena Germany",
         "coordinate": "51.5546309 7.0675262",
         "Latitude": 51.5546309,
         "Longitude": 7.0675262
@@ -1292,14 +1292,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row56",
-        "Club Name": "Sport-Verein Werder von 1899 Bremen",
+        "row_ID": "Row56",
+        "Club_Name": "Sport-Verein Werder von 1899 Bremen",
         "Formed": 1899,
         "Ground": "Weserstadion",
         "Capacity": 42100,
         "Manager": "Alexander Nouri",
         "Country": "Germany",
-        "combined string": "Weserstadion Germany",
+        "combined_string": "Weserstadion Germany",
         "coordinate": "53.06643279999999 8.837605199999999",
         "Latitude": 53.0664328,
         "Longitude": 8.8376052
@@ -1315,14 +1315,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row57",
-        "Club Name": "Verein für Leibesübungen Wolfsburg",
+        "row_ID": "Row57",
+        "Club_Name": "Verein für Leibesübungen Wolfsburg",
         "Formed": 1945,
         "Ground": "Volkswagenarena",
         "Capacity": 30000,
         "Manager": "Valérien Ismaël",
         "Country": "Germany",
-        "combined string": "Volkswagenarena Germany",
+        "combined_string": "Volkswagenarena Germany",
         "coordinate": "52.43263899999999 10.803889",
         "Latitude": 52.432639,
         "Longitude": 10.803889
@@ -1338,14 +1338,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row58",
-        "Club Name": "Atalanta Bergamasca Calcio",
+        "row_ID": "Row58",
+        "Club_Name": "Atalanta Bergamasca Calcio",
         "Formed": 1907,
         "Ground": "Atleti Azzurri d'Italia",
         "Capacity": 24276,
         "Manager": "Gian Piero Gasperini",
         "Country": "Italy",
-        "combined string": "Atleti Azzurri d'Italia Italy",
+        "combined_string": "Atleti Azzurri d'Italia Italy",
         "coordinate": "45.7092003 9.680845399999999",
         "Latitude": 45.7092003,
         "Longitude": 9.6808454
@@ -1361,14 +1361,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row59",
-        "Club Name": "Bologna Football",
+        "row_ID": "Row59",
+        "Club_Name": "Bologna Football",
         "Formed": 1909,
         "Ground": "Renato dall'Ara",
         "Capacity": 38279,
         "Manager": "Roberto Donadoni",
         "Country": "Italy",
-        "combined string": "Renato dall'Ara Italy",
+        "combined_string": "Renato dall'Ara Italy",
         "coordinate": "44.4922894 11.3099641",
         "Latitude": 44.4922894,
         "Longitude": 11.3099641
@@ -1384,14 +1384,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row60",
-        "Club Name": "Cagliari Calcio",
+        "row_ID": "Row60",
+        "Club_Name": "Cagliari Calcio",
         "Formed": 1920,
         "Ground": "Sant'Elia",
         "Capacity": 16000,
         "Manager": "Massimo Rastelli",
         "Country": "Italy",
-        "combined string": "Sant'Elia Italy",
+        "combined_string": "Sant'Elia Italy",
         "coordinate": "39.199450 9.135082",
         "Latitude": 39.19945,
         "Longitude": 9.135082
@@ -1407,14 +1407,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row61",
-        "Club Name": "Associazione Calcio ChievoVerona",
+        "row_ID": "Row61",
+        "Club_Name": "Associazione Calcio ChievoVerona",
         "Formed": 1929,
         "Ground": "Marc'Antonio Bentegodi",
         "Capacity": 31045,
         "Manager": "Rolando Maran",
         "Country": "Italy",
-        "combined string": "Marc'Antonio Bentegodi Italy",
+        "combined_string": "Marc'Antonio Bentegodi Italy",
         "coordinate": "45.4353226 10.9686282",
         "Latitude": 45.4353226,
         "Longitude": 10.9686282
@@ -1430,14 +1430,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row62",
-        "Club Name": "Football Club Crotone",
+        "row_ID": "Row62",
+        "Club_Name": "Football Club Crotone",
         "Formed": 1923,
         "Ground": "Ezio Scida",
         "Capacity": 9631,
         "Manager": "Davide Nicola",
         "Country": "Italy",
-        "combined string": "Ezio Scida Italy",
+        "combined_string": "Ezio Scida Italy",
         "coordinate": "39.07927919999999 17.1166658",
         "Latitude": 39.0792792,
         "Longitude": 17.1166658
@@ -1453,14 +1453,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row63",
-        "Club Name": "Empoli Football Club",
+        "row_ID": "Row63",
+        "Club_Name": "Empoli Football Club",
         "Formed": 1920,
         "Ground": "Carlo Castellani",
         "Capacity": 16284,
         "Manager": "Giovanni Martusciello",
         "Country": "Italy",
-        "combined string": "Carlo Castellani Italy",
+        "combined_string": "Carlo Castellani Italy",
         "coordinate": "43.72693 10.9554995",
         "Latitude": 43.72693,
         "Longitude": 10.9554995
@@ -1476,14 +1476,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row64",
-        "Club Name": "Associazione Calcio Firenze Fiorentina",
+        "row_ID": "Row64",
+        "Club_Name": "Associazione Calcio Firenze Fiorentina",
         "Formed": 2002,
         "Ground": "Artemio Franchi",
         "Capacity": 46366,
         "Manager": "Paulo Sousa",
         "Country": "Italy",
-        "combined string": "Artemio Franchi Italy",
+        "combined_string": "Artemio Franchi Italy",
         "coordinate": "43.7808349 11.2825717",
         "Latitude": 43.7808349,
         "Longitude": 11.2825717
@@ -1499,14 +1499,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row65",
-        "Club Name": "Genoa Cricket and Football Club",
+        "row_ID": "Row65",
+        "Club_Name": "Genoa Cricket and Football Club",
         "Formed": 1893,
         "Ground": "Luigi Ferraris",
         "Capacity": 36599,
         "Manager": "Andrea Mandorlini",
         "Country": "Italy",
-        "combined string": "Luigi Ferraris Italy",
+        "combined_string": "Luigi Ferraris Italy",
         "coordinate": "44.4165134 8.9525123",
         "Latitude": 44.4165134,
         "Longitude": 8.9525123
@@ -1522,14 +1522,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row66",
-        "Club Name": "Football Club Internazionale Milano",
+        "row_ID": "Row66",
+        "Club_Name": "Football Club Internazionale Milano",
         "Formed": 1908,
         "Ground": "Giuseppe Meazza",
         "Capacity": 80018,
         "Manager": "Stefano Pioli",
         "Country": "Italy",
-        "combined string": "Giuseppe Meazza Italy",
+        "combined_string": "Giuseppe Meazza Italy",
         "coordinate": "45.4781236 9.123961999999999",
         "Latitude": 45.4781236,
         "Longitude": 9.123962
@@ -1545,14 +1545,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row67",
-        "Club Name": "Juventus Football Club",
+        "row_ID": "Row67",
+        "Club_Name": "Juventus Football Club",
         "Formed": 1897,
         "Ground": "Juventus Stadium",
         "Capacity": 41475,
         "Manager": "Massimiliano Allegri",
         "Country": "Italy",
-        "combined string": "Juventus Stadium Italy",
+        "combined_string": "Juventus Stadium Italy",
         "coordinate": "45.109569 7.641264399999999",
         "Latitude": 45.109569,
         "Longitude": 7.6412644
@@ -1568,14 +1568,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row68",
-        "Club Name": "Societa Sportiva Lazio",
+        "row_ID": "Row68",
+        "Club_Name": "Societa Sportiva Lazio",
         "Formed": 1900,
         "Ground": "Olimpico",
         "Capacity": 70634,
         "Manager": "Siomne Inzaghi",
         "Country": "Italy",
-        "combined string": "Olimpico Italy",
+        "combined_string": "Olimpico Italy",
         "coordinate": "41.93407699999999 12.454725",
         "Latitude": 41.934077,
         "Longitude": 12.454725
@@ -1591,14 +1591,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row69",
-        "Club Name": "Associazione Calcio Milan",
+        "row_ID": "Row69",
+        "Club_Name": "Associazione Calcio Milan",
         "Formed": 1899,
         "Ground": "Giuseppe Meazza",
         "Capacity": 80018,
         "Manager": "Vincenzo Montella",
         "Country": "Italy",
-        "combined string": "Giuseppe Meazza Italy",
+        "combined_string": "Giuseppe Meazza Italy",
         "coordinate": "45.4781236 9.123961999999999",
         "Latitude": 45.4781236,
         "Longitude": 9.123962
@@ -1614,14 +1614,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row70",
-        "Club Name": "Società Sportiva Calcio Napoli",
+        "row_ID": "Row70",
+        "Club_Name": "Società Sportiva Calcio Napoli",
         "Formed": 1929,
         "Ground": "Stadio San Paolo",
         "Capacity": 60240,
         "Manager": "Maurizio Sarri",
         "Country": "Italy",
-        "combined string": "Stadio San Paolo Italy",
+        "combined_string": "Stadio San Paolo Italy",
         "coordinate": "40.8279365 14.1930611",
         "Latitude": 40.8279365,
         "Longitude": 14.1930611
@@ -1637,14 +1637,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row71",
-        "Club Name": "Unione Sportiva Citta di Palermo",
+        "row_ID": "Row71",
+        "Club_Name": "Unione Sportiva Citta di Palermo",
         "Formed": 1987,
         "Ground": "Renzo Barbera",
         "Capacity": 36349,
         "Manager": "Diego López",
         "Country": "Italy",
-        "combined string": "Renzo Barbera Italy",
+        "combined_string": "Renzo Barbera Italy",
         "coordinate": "38.1527423 13.3422089",
         "Latitude": 38.1527423,
         "Longitude": 13.3422089
@@ -1660,14 +1660,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row72",
-        "Club Name": "Delfino Pescara 1936",
+        "row_ID": "Row72",
+        "Club_Name": "Delfino Pescara 1936",
         "Formed": 2009,
         "Ground": "Adriatico",
         "Capacity": 20476,
         "Manager": "Zden?k Zeman",
         "Country": "Italy",
-        "combined string": "Adriatico Italy",
+        "combined_string": "Adriatico Italy",
         "coordinate": "42.455278 14.229578",
         "Latitude": 42.455278,
         "Longitude": 14.229578
@@ -1683,14 +1683,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row73",
-        "Club Name": "Associazione Sportiva Roma",
+        "row_ID": "Row73",
+        "Club_Name": "Associazione Sportiva Roma",
         "Formed": 1927,
         "Ground": "Olimpico",
         "Capacity": 70634,
         "Manager": "Luciano Spalletti",
         "Country": "Italy",
-        "combined string": "Olimpico Italy",
+        "combined_string": "Olimpico Italy",
         "coordinate": "41.93407699999999 12.454725",
         "Latitude": 41.934077,
         "Longitude": 12.454725
@@ -1706,14 +1706,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row74",
-        "Club Name": "Unione Calcio Sampdoria",
+        "row_ID": "Row74",
+        "Club_Name": "Unione Calcio Sampdoria",
         "Formed": 1946,
         "Ground": "Luigi Ferraris",
         "Capacity": 36599,
         "Manager": "Marco Giampaolo",
         "Country": "Italy",
-        "combined string": "Luigi Ferraris Italy",
+        "combined_string": "Luigi Ferraris Italy",
         "coordinate": "44.4165134 8.9525123",
         "Latitude": 44.4165134,
         "Longitude": 8.9525123
@@ -1729,14 +1729,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row75",
-        "Club Name": "Unione Sportiva Sassuolo Calcio",
+        "row_ID": "Row75",
+        "Club_Name": "Unione Sportiva Sassuolo Calcio",
         "Formed": 1922,
         "Ground": "Mapei Stadium-Città del Tricolore",
         "Capacity": 23717,
         "Manager": "Eusebio Di Francesco",
         "Country": "Italy",
-        "combined string": "Mapei Stadium-Città del Tricolore Italy",
+        "combined_string": "Mapei Stadium-Città del Tricolore Italy",
         "coordinate": "44.7145409 10.6497216",
         "Latitude": 44.7145409,
         "Longitude": 10.6497216
@@ -1752,14 +1752,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row76",
-        "Club Name": "Torino Football Club",
+        "row_ID": "Row76",
+        "Club_Name": "Torino Football Club",
         "Formed": 1906,
         "Ground": "Olimpico di Torino",
         "Capacity": 27958,
         "Manager": "Siniša Mihajlovi?",
         "Country": "Italy",
-        "combined string": "Olimpico di Torino Italy",
+        "combined_string": "Olimpico di Torino Italy",
         "coordinate": "45.0418233 7.650052199999999",
         "Latitude": 45.0418233,
         "Longitude": 7.6500522
@@ -1775,14 +1775,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row77",
-        "Club Name": "Udinese Calcio",
+        "row_ID": "Row77",
+        "Club_Name": "Udinese Calcio",
         "Formed": 1896,
         "Ground": "Dacia Arena",
         "Capacity": 25144,
         "Manager": "Luigi Delneri",
         "Country": "Italy",
-        "combined string": "Dacia Arena Italy",
+        "combined_string": "Dacia Arena Italy",
         "coordinate": "46.0814883 13.199805",
         "Latitude": 46.0814883,
         "Longitude": 13.199805
@@ -1798,14 +1798,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row78",
-        "Club Name": "Angers Sporting Club de l'Ouest",
+        "row_ID": "Row78",
+        "Club_Name": "Angers Sporting Club de l'Ouest",
         "Formed": 1919,
         "Ground": "Stade Jean-Bouin",
         "Capacity": 17000,
         "Manager": "Stéphane Moulin",
         "Country": "France",
-        "combined string": "Stade Jean-Bouin France",
+        "combined_string": "Stade Jean-Bouin France",
         "coordinate": "47.460475 -0.530837",
         "Latitude": 47.460475,
         "Longitude": -0.530837
@@ -1821,14 +1821,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row79",
-        "Club Name": "Sporting Club de Bastia",
+        "row_ID": "Row79",
+        "Club_Name": "Sporting Club de Bastia",
         "Formed": 1905,
         "Ground": "Stade Armand-Césari",
         "Capacity": 16460,
         "Manager": "François Ciccolini",
         "Country": "France",
-        "combined string": "Stade Armand-Césari France",
+        "combined_string": "Stade Armand-Césari France",
         "coordinate": "42.6514431 9.442694699999999",
         "Latitude": 42.6514431,
         "Longitude": 9.4426947
@@ -1844,14 +1844,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row80",
-        "Club Name": "Football Club des Girondins de Bordeaux",
+        "row_ID": "Row80",
+        "Club_Name": "Football Club des Girondins de Bordeaux",
         "Formed": 1881,
         "Ground": "Nouveau Stade Bordeaux",
         "Capacity": 42115,
         "Manager": "Jocelyn Gourvennec",
         "Country": "France",
-        "combined string": "Nouveau Stade Bordeaux France",
+        "combined_string": "Nouveau Stade Bordeaux France",
         "coordinate": "44.8973817 -0.5617511",
         "Latitude": 44.8973817,
         "Longitude": -0.5617511
@@ -1867,14 +1867,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row81",
-        "Club Name": "Stade Malherbe Caen-Calvados Basse-Normandie",
+        "row_ID": "Row81",
+        "Club_Name": "Stade Malherbe Caen-Calvados Basse-Normandie",
         "Formed": 1913,
         "Ground": "Stade Michel d'Ornano",
         "Capacity": 22864,
         "Manager": "Patrice Garande",
         "Country": "France",
-        "combined string": "Stade Michel d'Ornano France",
+        "combined_string": "Stade Michel d'Ornano France",
         "coordinate": "49.1794872 -0.3967094",
         "Latitude": 49.1794872,
         "Longitude": -0.3967094
@@ -1890,14 +1890,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row82",
-        "Club Name": "Dijon Football Côte d'Or",
+        "row_ID": "Row82",
+        "Club_Name": "Dijon Football Côte d'Or",
         "Formed": 1998,
         "Ground": "Stade Gaston-Gérard",
         "Capacity": 22000,
         "Manager": "Olivier Dall'Oglio",
         "Country": "France",
-        "combined string": "Stade Gaston-Gérard France",
+        "combined_string": "Stade Gaston-Gérard France",
         "coordinate": "47.3243816 5.0683285",
         "Latitude": 47.3243816,
         "Longitude": 5.0683285
@@ -1913,14 +1913,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row83",
-        "Club Name": "En Avant de Guingamp",
+        "row_ID": "Row83",
+        "Club_Name": "En Avant de Guingamp",
         "Formed": 1912,
         "Ground": "Stade Municipal du Roudourou",
         "Capacity": 18250,
         "Manager": "Antoine Kombouaré",
         "Country": "France",
-        "combined string": "Stade Municipal du Roudourou France",
+        "combined_string": "Stade Municipal du Roudourou France",
         "coordinate": "48.56608629999999 -3.1643843",
         "Latitude": 48.5660863,
         "Longitude": -3.1643843
@@ -1936,14 +1936,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row84",
-        "Club Name": "Lille Olympique Sporting Club Lille Métropole",
+        "row_ID": "Row84",
+        "Club_Name": "Lille Olympique Sporting Club Lille Métropole",
         "Formed": 1944,
         "Ground": "Stade Pierre-Mauroy",
         "Capacity": 50186,
         "Manager": "Patrick Collot",
         "Country": "France",
-        "combined string": "Stade Pierre-Mauroy France",
+        "combined_string": "Stade Pierre-Mauroy France",
         "coordinate": "50.6119667 3.1304899",
         "Latitude": 50.6119667,
         "Longitude": 3.1304899
@@ -1959,14 +1959,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row85",
-        "Club Name": "Football Club Lorient",
+        "row_ID": "Row85",
+        "Club_Name": "Football Club Lorient",
         "Formed": 1926,
         "Ground": "Stade du Moustoir",
         "Capacity": 18110,
         "Manager": "Bernard Casoni",
         "Country": "France",
-        "combined string": "Stade du Moustoir France",
+        "combined_string": "Stade du Moustoir France",
         "coordinate": "47.7487894 -3.3692827",
         "Latitude": 47.7487894,
         "Longitude": -3.3692827
@@ -1982,14 +1982,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row86",
-        "Club Name": "Olympique de Lyon et du Rhône",
+        "row_ID": "Row86",
+        "Club_Name": "Olympique de Lyon et du Rhône",
         "Formed": 1950,
         "Ground": "Parc Olympique Lyonnais",
         "Capacity": 59186,
         "Manager": "Bruno Génésio",
         "Country": "France",
-        "combined string": "Parc Olympique Lyonnais France",
+        "combined_string": "Parc Olympique Lyonnais France",
         "coordinate": "45.76529499999999 4.982029",
         "Latitude": 45.765295,
         "Longitude": 4.982029
@@ -2005,14 +2005,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row87",
-        "Club Name": "Olympique de Marseille",
+        "row_ID": "Row87",
+        "Club_Name": "Olympique de Marseille",
         "Formed": 1899,
         "Ground": "Stade Vélodrome",
         "Capacity": 67394,
         "Manager": "Rudi García",
         "Country": "France",
-        "combined string": "Stade Vélodrome France",
+        "combined_string": "Stade Vélodrome France",
         "coordinate": "43.269827 5.395887300000001",
         "Latitude": 43.269827,
         "Longitude": 5.3958873
@@ -2028,14 +2028,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row88",
-        "Club Name": "Football Club de Metz",
+        "row_ID": "Row88",
+        "Club_Name": "Football Club de Metz",
         "Formed": 1932,
         "Ground": "Stade Saint-Symphorien",
         "Capacity": 26667,
         "Manager": "Philippe Hinschberger",
         "Country": "France",
-        "combined string": "Stade Saint-Symphorien France",
+        "combined_string": "Stade Saint-Symphorien France",
         "coordinate": "49.1097781 6.159414099999999",
         "Latitude": 49.1097781,
         "Longitude": 6.1594141
@@ -2051,14 +2051,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row89",
-        "Club Name": "Association Sportive de Monaco",
+        "row_ID": "Row89",
+        "Club_Name": "Association Sportive de Monaco",
         "Formed": 1919,
         "Ground": "Stade Louis 2",
         "Capacity": 18523,
         "Manager": "Leonardo Jardim",
         "Country": "France",
-        "combined string": "Stade Louis 2 France",
+        "combined_string": "Stade Louis 2 France",
         "coordinate": "43.727587 7.415491",
         "Latitude": 43.727587,
         "Longitude": 7.415491
@@ -2074,14 +2074,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row90",
-        "Club Name": "Montpellier-Hérault Sport Club",
+        "row_ID": "Row90",
+        "Club_Name": "Montpellier-Hérault Sport Club",
         "Formed": 1974,
         "Ground": "Stade de la Mosson",
         "Capacity": 32500,
         "Manager": "Frédéric Hantz",
         "Country": "France",
-        "combined string": "Stade de la Mosson France",
+        "combined_string": "Stade de la Mosson France",
         "coordinate": "43.6221667 3.8119627",
         "Latitude": 43.6221667,
         "Longitude": 3.8119627
@@ -2097,14 +2097,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row91",
-        "Club Name": "Association Sportive Nancy-Lorraine",
+        "row_ID": "Row91",
+        "Club_Name": "Association Sportive Nancy-Lorraine",
         "Formed": 1967,
         "Ground": "Stade Marcel Picot",
         "Capacity": 20085,
         "Manager": "Pablo Correa",
         "Country": "France",
-        "combined string": "Stade Marcel Picot France",
+        "combined_string": "Stade Marcel Picot France",
         "coordinate": "48.6954559 6.2107189",
         "Latitude": 48.6954559,
         "Longitude": 6.2107189
@@ -2120,14 +2120,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row92",
-        "Club Name": "Football Club de Nantes Atlantique",
+        "row_ID": "Row92",
+        "Club_Name": "Football Club de Nantes Atlantique",
         "Formed": 1943,
         "Ground": "Stade de la Beaujoire-Louis Fonteneau",
         "Capacity": 37583,
         "Manager": "Sérgio Conceçião",
         "Country": "France",
-        "combined string": "Stade de la Beaujoire-Louis Fonteneau France",
+        "combined_string": "Stade de la Beaujoire-Louis Fonteneau France",
         "coordinate": "47.2560513 -1.5247253",
         "Latitude": 47.2560513,
         "Longitude": -1.5247253
@@ -2143,14 +2143,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row93",
-        "Club Name": "Olympique Club Gymnaste Club de Nice-Côte d'Azur",
+        "row_ID": "Row93",
+        "Club_Name": "Olympique Club Gymnaste Club de Nice-Côte d'Azur",
         "Formed": 1904,
         "Ground": "Allianz Riviera",
         "Capacity": 35624,
         "Manager": "Lucien Favre",
         "Country": "France",
-        "combined string": "Allianz Riviera France",
+        "combined_string": "Allianz Riviera France",
         "coordinate": "43.7050594 7.192585",
         "Latitude": 43.7050594,
         "Longitude": 7.192585
@@ -2166,14 +2166,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row94",
-        "Club Name": "Paris Saint-Germain Football Club",
+        "row_ID": "Row94",
+        "Club_Name": "Paris Saint-Germain Football Club",
         "Formed": 1970,
         "Ground": "Parc des Princes",
         "Capacity": 47428,
         "Manager": "Unai Emery",
         "Country": "France",
-        "combined string": "Parc des Princes France",
+        "combined_string": "Parc des Princes France",
         "coordinate": "48.8414356 2.2530487",
         "Latitude": 48.8414356,
         "Longitude": 2.2530487
@@ -2189,14 +2189,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row95",
-        "Club Name": "Stade Rennais Football Club",
+        "row_ID": "Row95",
+        "Club_Name": "Stade Rennais Football Club",
         "Formed": 1901,
         "Ground": "Roazhon Park",
         "Capacity": 29778,
         "Manager": "Christian Gourcuff",
         "Country": "France",
-        "combined string": "Roazhon Park France",
+        "combined_string": "Roazhon Park France",
         "coordinate": "48.1074784 -1.7128683",
         "Latitude": 48.1074784,
         "Longitude": -1.7128683
@@ -2212,14 +2212,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row96",
-        "Club Name": "Association Sportive de Saint-Etienne",
+        "row_ID": "Row96",
+        "Club_Name": "Association Sportive de Saint-Etienne",
         "Formed": 1933,
         "Ground": "Stade Geoffroy-Guichard",
         "Capacity": 42000,
         "Manager": "Christophe Galtier",
         "Country": "France",
-        "combined string": "Stade Geoffroy-Guichard France",
+        "combined_string": "Stade Geoffroy-Guichard France",
         "coordinate": "45.4607318 4.3901162",
         "Latitude": 45.4607318,
         "Longitude": 4.3901162
@@ -2235,14 +2235,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row97",
-        "Club Name": "Toulouse Football Club",
+        "row_ID": "Row97",
+        "Club_Name": "Toulouse Football Club",
         "Formed": 1937,
         "Ground": "Le Stadium",
         "Capacity": 35575,
         "Manager": "Pascal Dupraz",
         "Country": "France",
-        "combined string": "Le Stadium France",
+        "combined_string": "Le Stadium France",
         "coordinate": "43.5832972 1.434048",
         "Latitude": 43.5832972,
         "Longitude": 1.434048
@@ -2258,14 +2258,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row98",
-        "Club Name": "Fussball Club Basel 1893",
+        "row_ID": "Row98",
+        "Club_Name": "Fussball Club Basel 1893",
         "Formed": 1893,
         "Ground": "Sankt-Jakob-Park",
         "Capacity": 37994,
         "Manager": "Urs Fischer",
         "Country": "Switzerland",
-        "combined string": "Sankt-Jakob-Park Switzerland",
+        "combined_string": "Sankt-Jakob-Park Switzerland",
         "coordinate": "47.54158940000001 7.620075600000001",
         "Latitude": 47.5415894,
         "Longitude": 7.6200756
@@ -2281,14 +2281,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row99",
-        "Club Name": "Grasshopper-Club Zürich",
+        "row_ID": "Row99",
+        "Club_Name": "Grasshopper-Club Zürich",
         "Formed": 1886,
         "Ground": "Stadion Letzigrund",
         "Capacity": 26104,
         "Manager": "Pierluigi Tami",
         "Country": "Switzerland",
-        "combined string": "Stadion Letzigrund Switzerland",
+        "combined_string": "Stadion Letzigrund Switzerland",
         "coordinate": "47.3826664 8.5038076",
         "Latitude": 47.3826664,
         "Longitude": 8.5038076
@@ -2304,14 +2304,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row100",
-        "Club Name": "Football Club Lausanne-Sport",
+        "row_ID": "Row100",
+        "Club_Name": "Football Club Lausanne-Sport",
         "Formed": 1896,
         "Ground": "Olympique de la Pontaise",
         "Capacity": 8500,
         "Manager": "Fabio Celestini",
         "Country": "Switzerland",
-        "combined string": "Olympique de la Pontaise Switzerland",
+        "combined_string": "Olympique de la Pontaise Switzerland",
         "coordinate": "46.5333333 6.624166700000001",
         "Latitude": 46.5333333,
         "Longitude": 6.6241667
@@ -2327,14 +2327,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row101",
-        "Club Name": "Football Club Lugano",
+        "row_ID": "Row101",
+        "Club_Name": "Football Club Lugano",
         "Formed": 1908,
         "Ground": "Cornaredo",
         "Capacity": 6390,
         "Manager": "Paolo Tramezzani",
         "Country": "Switzerland",
-        "combined string": "Cornaredo Switzerland",
+        "combined_string": "Cornaredo Switzerland",
         "coordinate": "46.0237601 8.961463",
         "Latitude": 46.0237601,
         "Longitude": 8.961463
@@ -2350,14 +2350,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row102",
-        "Club Name": "Fussball Club Luzern",
+        "row_ID": "Row102",
+        "Club_Name": "Fussball Club Luzern",
         "Formed": 1901,
         "Ground": "Swissporarena",
         "Capacity": 16490,
         "Manager": "Markus Babbel",
         "Country": "Switzerland",
-        "combined string": "Swissporarena Switzerland",
+        "combined_string": "Swissporarena Switzerland",
         "coordinate": "47.0331171 8.3051247",
         "Latitude": 47.0331171,
         "Longitude": 8.3051247
@@ -2373,14 +2373,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row103",
-        "Club Name": "Fussball Club St. Gallen 1879",
+        "row_ID": "Row103",
+        "Club_Name": "Fussball Club St. Gallen 1879",
         "Formed": 1879,
         "Ground": "Kybunpark",
         "Capacity": 19456,
         "Manager": "Joe Zinnbauer",
         "Country": "Switzerland",
-        "combined string": "Kybunpark Switzerland",
+        "combined_string": "Kybunpark Switzerland",
         "coordinate": "47.4083034 9.3057346",
         "Latitude": 47.4083034,
         "Longitude": 9.3057346
@@ -2396,14 +2396,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row104",
-        "Club Name": "Football Club Sion",
+        "row_ID": "Row104",
+        "Club_Name": "Football Club Sion",
         "Formed": 1909,
         "Ground": "Stade de Tourbillon",
         "Capacity": 14283,
         "Manager": "Peter Zeidler",
         "Country": "Switzerland",
-        "combined string": "Stade de Tourbillon Switzerland",
+        "combined_string": "Stade de Tourbillon Switzerland",
         "coordinate": "46.233315 7.375967299999999",
         "Latitude": 46.233315,
         "Longitude": 7.3759673
@@ -2419,14 +2419,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row105",
-        "Club Name": "Fussball Club Thun 1898",
+        "row_ID": "Row105",
+        "Club_Name": "Fussball Club Thun 1898",
         "Formed": 1898,
         "Ground": "Stockhorn Arena",
         "Capacity": 10014,
         "Manager": "Jeff Saibene",
         "Country": "Switzerland",
-        "combined string": "Stockhorn Arena Switzerland",
+        "combined_string": "Stockhorn Arena Switzerland",
         "coordinate": "46.7445789 7.6065383",
         "Latitude": 46.7445789,
         "Longitude": 7.6065383
@@ -2442,14 +2442,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row106",
-        "Club Name": "Fußball Club Vaduz",
+        "row_ID": "Row106",
+        "Club_Name": "Fußball Club Vaduz",
         "Formed": 1932,
         "Ground": "Rheinpark Stadion",
         "Capacity": 7564,
         "Manager": "Giorgio Contini",
         "Country": "Switzerland",
-        "combined string": "Rheinpark Stadion Switzerland",
+        "combined_string": "Rheinpark Stadion Switzerland",
         "coordinate": "47.1405293 9.5102862",
         "Latitude": 47.1405293,
         "Longitude": 9.5102862
@@ -2465,14 +2465,14 @@
     {
       "type": "Feature",
       "properties": {
-        "row ID": "Row107",
-        "Club Name": "Berner Sport-Club Young Boys",
+        "row_ID": "Row107",
+        "Club_Name": "Berner Sport-Club Young Boys",
         "Formed": 1898,
         "Ground": "Stade de Suisse",
         "Capacity": 31789,
         "Manager": "Adolf Hütter",
         "Country": "Switzerland",
-        "combined string": "Stade de Suisse Switzerland",
+        "combined_string": "Stade de Suisse Switzerland",
         "coordinate": "46.9631123 7.4648745",
         "Latitude": 46.9631123,
         "Longitude": 7.4648745
