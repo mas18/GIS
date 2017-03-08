@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="data/js/jquery-3.1.1.min.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
+    <script src="data/js/stade-complete.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+
+<canvas id="oldestClub" width="800" height="450" style="float:left;"></canvas>
+<canvas id="youngestClub" width="800" height="450" style="float:left;"></canvas>
+<canvas id="averageClub" width="450" height="450" style="float:left;"></canvas>
+
+<script>
+
+    // Any of the following formats may be used
+    var oldestClub = document.getElementById("oldestClub");
+    var youngestClub = document.getElementById("youngestClub");
+    var averageClub = document.getElementById("averageClub");
+
+    var options = {
+        animation: {
+            duration:1500
+        },
+        responsive:false,
+        maintainAspectRatio: false
+    };
+
+    var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000];
+    var oldestClubs = ["", "", "", "", "", ""];
+    var youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+    var youngestClubs = ["", "", "", "", "", ""];
+    var englandAverage = new Array();
+    var franceAverage = new Array();
+    var spainAverage = new Array();
+    var italyAverage = new Array();
+    var germanyAverage = new Array();
+    var switzerlandAverage = new Array();
+    var averageValues = [0, 0, 0, 0, 0, 0];
+
+    $.get('data/geojson/stade-complete-modif.geojson', function(data) {
+
+        $.each(data.features, function (key, val) {
+
+            switch(val.properties.Country) {
+                case "England":
+                    englandAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[0]) {
+                        oldestValues[0] = val.properties.Formed;
+                        oldestClubs[0] = "Angleterre - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[0]) {
+                        youngestValues[0] = val.properties.Formed;
+                        youngestClubs[0] = "Angleterre - " + val.properties.Club_Name;
+                    }
+                    break;
+                case "Spain":
+                    spainAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[2]) {
+                        oldestValues[2] = val.properties.Formed;
+                        oldestClubs[2] = "Espagne - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[2]) {
+                        youngestValues[2] = val.properties.Formed;
+                        youngestClubs[2] = "Espagne - " + val.properties.Club_Name;
+                    }
+                    break;
+                case "Germany":
+                    germanyAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[4]) {
+                        oldestValues[4] = val.properties.Formed;
+                        oldestClubs[4] = "Allemagne - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[4]) {
+                        youngestValues[4] = val.properties.Formed;
+                        youngestClubs[4] = "Allemagne - " + val.properties.Club_Name;
+                    }
+                    break;
+                case "Italy":
+                    italyAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[3]) {
+                        oldestValues[3] = val.properties.Formed;
+                        oldestClubs[3] = "Italie - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[3]) {
+                        youngestValues[3] = val.properties.Formed;
+                        youngestClubs[3] = "Italie - " + val.properties.Club_Name;
+                    }
+                    break;
+                case "France":
+                    franceAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[1]) {
+                        oldestValues[1] = val.properties.Formed;
+                        oldestClubs[1] = "France - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[1]) {
+                        youngestValues[1] = val.properties.Formed;
+                        youngestClubs[1] = "France - " + val.properties.Club_Name;
+                    }
+                    break;
+                case "Switzerland":
+                    switzerlandAverage.push(val.properties.Formed);
+                    if(val.properties.Formed < oldestValues[5]) {
+                        oldestValues[5] = val.properties.Formed;
+                        oldestClubs[5] = "Suisse - " + val.properties.Club_Name;
+                    }
+                    if(val.properties.Formed > youngestValues[5]) {
+                        youngestValues[5] = val.properties.Formed;
+                        youngestClubs[5] = "Suisse - " + val.properties.Club_Name;
+                    }
+                    break;
+                default:
+            }
+        });
+
+        var sum = 0;
+        for( var i = 0; i < englandAverage.length; i++ ){
+            sum += parseInt( englandAverage[i], 10 );
+        }
+        averageValues[0] = Math.round(sum/englandAverage.length);
+
+        var sum = 0;
+        for( var i = 0; i < spainAverage.length; i++ ){
+            sum += parseInt( spainAverage[i], 10 );
+        }
+        averageValues[2] = Math.round(sum/spainAverage.length);
+
+        var sum = 0;
+        for( var i = 0; i < germanyAverage.length; i++ ){
+            sum += parseInt( germanyAverage[i], 10 );
+        }
+        averageValues[4] = Math.round(sum/germanyAverage.length);
+
+        var sum = 0;
+        for( var i = 0; i < italyAverage.length; i++ ){
+            sum += parseInt( italyAverage[i], 10 );
+        }
+        averageValues[3] = Math.round(sum/italyAverage.length);
+
+        var sum = 0;
+        for( var i = 0; i < franceAverage.length; i++ ){
+            sum += parseInt( franceAverage[i], 10 );
+        }
+        averageValues[1] = Math.round(sum/franceAverage.length);
+
+        var sum = 0;
+        for( var i = 0; i < switzerlandAverage.length; i++ ){
+            sum += parseInt( switzerlandAverage[i], 10 );
+        }
+        averageValues[5] = Math.round(sum/switzerlandAverage.length);
+
+
+
+        var oldestClubChart = new Chart(oldestClub, {
+            type: 'horizontalBar',
+            data: {
+                labels: oldestClubs,
+                datasets: [{
+                    label: 'Club le plus ancien',
+                    data: oldestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+
+        var youngestClubChart = new Chart(youngestClub, {
+            type: 'horizontalBar',
+            data: {
+                labels: youngestClubs,
+                datasets: [{
+                    label: 'Club le plus récent',
+                    data: youngestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+
+        var averageClubChart = new Chart(averageClub, {
+            type: 'bar',
+            data: {
+                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+                datasets: [{
+                    label: 'Age moyen',
+                    data: averageValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+    });
+
+</script>
+</body>
+</html>
