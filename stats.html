@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>Statistiques</title>
     <script src="data/js/jquery-3.1.1.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
@@ -26,135 +24,67 @@
         var averageClub = document.getElementById("averageClub");
 
         var options = {
-            animation: {
-                duration:1500
-            },
+            animation: { duration:1500 },
             responsive:false,
             maintainAspectRatio: false
         };
 
-        var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000];
-        var oldestClubs = ["", "", "", "", "", ""];
-        var youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
-        var youngestClubs = ["", "", "", "", "", ""];
-        var englandAverage = new Array();
-        var franceAverage = new Array();
-        var spainAverage = new Array();
-        var italyAverage = new Array();
-        var germanyAverage = new Array();
-        var switzerlandAverage = new Array();
-        var averageValues = [0, 0, 0, 0, 0, 0];
+        var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000], youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var oldestClubs = ["", "", "", "", "", ""], youngestClubs = ["", "", "", "", "", ""];
+        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
 
         $.each(data.features, function (key, val) {
-
             switch(val.properties.Country) {
                 case "England":
-                    englandAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[0]) {
-                        oldestValues[0] = val.properties.Formed;
-                        oldestClubs[0] = "Angleterre - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[0]) {
-                        youngestValues[0] = val.properties.Formed;
-                        youngestClubs[0] = "Angleterre - " + val.properties.Club_Name;
-                    }
+                    getStatistics(englandAverage, "Angleterre - ", 0, val);
                     break;
                 case "Spain":
-                    spainAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[2]) {
-                        oldestValues[2] = val.properties.Formed;
-                        oldestClubs[2] = "Espagne - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[2]) {
-                        youngestValues[2] = val.properties.Formed;
-                        youngestClubs[2] = "Espagne - " + val.properties.Club_Name;
-                    }
+                    getStatistics(spainAverage, "Espagne - ", 2, val);
                     break;
                 case "Germany":
-                    germanyAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[4]) {
-                        oldestValues[4] = val.properties.Formed;
-                        oldestClubs[4] = "Allemagne - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[4]) {
-                        youngestValues[4] = val.properties.Formed;
-                        youngestClubs[4] = "Allemagne - " + val.properties.Club_Name;
-                    }
+                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
                     break;
                 case "Italy":
-                    italyAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[3]) {
-                        oldestValues[3] = val.properties.Formed;
-                        oldestClubs[3] = "Italie - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[3]) {
-                        youngestValues[3] = val.properties.Formed;
-                        youngestClubs[3] = "Italie - " + val.properties.Club_Name;
-                    }
+                    getStatistics(italyAverage, "Italie - ", 3, val);
                     break;
                 case "France":
-                    franceAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[1]) {
-                        oldestValues[1] = val.properties.Formed;
-                        oldestClubs[1] = "France - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[1]) {
-                        youngestValues[1] = val.properties.Formed;
-                        youngestClubs[1] = "France - " + val.properties.Club_Name;
-                    }
+                    getStatistics(franceAverage, "France - ", 1, val);
                     break;
                 case "Switzerland":
-                    switzerlandAverage.push(val.properties.Formed);
-                    if(val.properties.Formed < oldestValues[5]) {
-                        oldestValues[5] = val.properties.Formed;
-                        oldestClubs[5] = "Suisse - " + val.properties.Club_Name;
-                    }
-                    if(val.properties.Formed > youngestValues[5]) {
-                        youngestValues[5] = val.properties.Formed;
-                        youngestClubs[5] = "Suisse - " + val.properties.Club_Name;
-                    }
+                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
                     break;
                 default:
             }
         });
 
-        var sum = 0;
-        for( var i = 0; i < englandAverage.length; i++ ){
-            sum += parseInt( englandAverage[i], 10 );
+        oldestValues = [getAge(oldestValues[0]), getAge(oldestValues[1]), getAge(oldestValues[2]), getAge(oldestValues[3]), getAge(oldestValues[4]), getAge(oldestValues[5])];
+        youngestValues = [getAge(youngestValues[0]), getAge(youngestValues[1]), getAge(youngestValues[2]), getAge(youngestValues[3]), getAge(youngestValues[4]), getAge(youngestValues[5])];
+        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
+
+        function getAge(year) {
+            var date = new Date().getFullYear();
+            return date - year;
         }
-        averageValues[0] = Math.round(sum/englandAverage.length);
 
-        var sum = 0;
-        for( var i = 0; i < spainAverage.length; i++ ){
-            sum += parseInt( spainAverage[i], 10 );
+        function getAverage(average) {
+            var sum = 0;
+            for(var i = 0; i < average.length; i++) {
+                sum += parseInt(average[i], 10);
+            }
+            return getAge(Math.round(sum/average.length));
         }
-        averageValues[2] = Math.round(sum/spainAverage.length);
 
-        var sum = 0;
-        for( var i = 0; i < germanyAverage.length; i++ ){
-            sum += parseInt( germanyAverage[i], 10 );
+        function getStatistics(average, country, position, value) {
+            average.push(value.properties.Formed);
+            if(value.properties.Formed < oldestValues[position]) {
+                oldestValues[position] = value.properties.Formed;
+                oldestClubs[position] = country + value.properties.Club_Name;
+            }
+            if(value.properties.Formed > youngestValues[position]) {
+                youngestValues[position] = value.properties.Formed;
+                youngestClubs[position] = country + value.properties.Club_Name;
+            }
         }
-        averageValues[4] = Math.round(sum/germanyAverage.length);
-
-        var sum = 0;
-        for( var i = 0; i < italyAverage.length; i++ ){
-            sum += parseInt( italyAverage[i], 10 );
-        }
-        averageValues[3] = Math.round(sum/italyAverage.length);
-
-        var sum = 0;
-        for( var i = 0; i < franceAverage.length; i++ ){
-            sum += parseInt( franceAverage[i], 10 );
-        }
-        averageValues[1] = Math.round(sum/franceAverage.length);
-
-        var sum = 0;
-        for( var i = 0; i < switzerlandAverage.length; i++ ){
-            sum += parseInt( switzerlandAverage[i], 10 );
-        }
-        averageValues[5] = Math.round(sum/switzerlandAverage.length);
-
-
 
         var oldestClubChart = new Chart(oldestClub, {
             type: 'horizontalBar',
