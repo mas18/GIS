@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="data/css/control.fullscreen.css" />
+    <link rel="stylesheet" href="data/css/zoneInfo.css"/>
+    <script src="data/js/control.fullscreen.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
+    <script src="data/js/stade-complete.js"></script>
+    <script src="data/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="map" style="height: 600px; width: 800px"></div>
+<script>
+    var map = L.map('map', {
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }
+    });
+
+    var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    }).addTo(map);
+
+    L.geoJson(allPlayers, {
+        onEachFeature: playerPopup,
+    }).addTo(map);
+
+    function playerPopup(feature, layer){
+        layer.bindPopup("<h4> "+ feature.properties.Name + "</h4>");
+    }
+</script>
+</body>
+</html>
