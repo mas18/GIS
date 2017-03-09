@@ -250,28 +250,11 @@
             type: 'polarArea',
             options: options
         });
-
-        alert(new Date("1993-11-26"));
-        alert(getAge("1993-11-26"));
-
-        function getAge(dateString)
-        {
-            var today = new Date();
-            var birthDate = new Date(dateString);
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
-            {
-                age--;
-            }
-            return age;
-        }
-
     });
 
     // PLAYERS AGE -------------------------------------------------------------------------------------
 
-    /*$.get('data/geojson/players-complete.geojson', function(data) {
+    $.get('data/geojson/players-complete.geojson', function(data) {
 
         var oldestPlayer = document.getElementById("oldestPlayer");
         var youngestPlayer = document.getElementById("youngestPlayer");
@@ -280,10 +263,17 @@
         var options = {
             animation: { duration:1500 },
             responsive:false,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         };
 
-        var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000], youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var youngestValues = [10000, 10000, 10000, 10000, 10000, 10000], oldestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
         var oldestPlayers = ["", "", "", "", "", ""], youngestPlayers = ["", "", "", "", "", ""];
         var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
 
@@ -311,19 +301,19 @@
             }
         });
 
-        oldestValues = [getAge(oldestValues[0]), getAge(oldestValues[1]), getAge(oldestValues[2]), getAge(oldestValues[3]), getAge(oldestValues[4]), getAge(oldestValues[5])];
-        youngestValues = [getAge(youngestValues[0]), getAge(youngestValues[1]), getAge(youngestValues[2]), getAge(youngestValues[3]), getAge(youngestValues[4]), getAge(youngestValues[5])];
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
-
-        /*function getAge(year) {
-            var date = new Date().getFullYear();
-            return date - year;
-        }
 
         function getAge(dateString)
         {
+            var year = "00";
+            if(dateString.substring(6, 8) < 50)
+                year = "20";
+            else
+                year = "19";
+            var newDate = year + dateString.substring(6, 8) + "-" + dateString.substring(3, 5) + "-" + dateString.substring(0, 2);
+
             var today = new Date();
-            var birthDate = new Date(dateString);
+            var birthDate = new Date(newDate);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
@@ -334,31 +324,32 @@
         }
 
         function getAverage(average) {
+            alert(average);
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
                 sum += parseInt(average[i], 10);
             }
-            return getAge(Math.round(sum/average.length));
+            return Math.round(sum/average.length);
         }
 
         function getStatistics(average, country, position, value) {
-            average.push(value.properties.Formed);
-            if(value.properties.Formed < oldestValues[position]) {
-                oldestValues[position] = value.properties.Formed;
-                oldestClubs[position] = country + value.properties.Club_Name;
+            average.push(getAge(value.properties.Date_of_Birth));
+            if(getAge(value.properties.Date_of_Birth) > oldestValues[position]) {
+                oldestValues[position] = getAge(value.properties.Date_of_Birth);
+                oldestPlayers[position] = country + value.properties.Name;
             }
-            if(value.properties.Formed > youngestValues[position]) {
-                youngestValues[position] = value.properties.Formed;
-                youngestClubs[position] = country + value.properties.Club_Name;
+            if(getAge(value.properties.Date_of_Birth) < youngestValues[position]) {
+                youngestValues[position] = getAge(value.properties.Date_of_Birth);
+                youngestPlayers[position] = country + value.properties.Name;
             }
         }
 
-        var oldestClubChart = new Chart(oldestClub, {
+        var oldestPlayerChart = new Chart(oldestPlayer, {
             type: 'horizontalBar',
             data: {
-                labels: oldestClubs,
+                labels: oldestPlayers,
                 datasets: [{
-                    label: 'Club le plus ancien',
+                    label: 'Joueur le plus âgé',
                     data: oldestValues,
                     backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
                     borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
@@ -368,12 +359,12 @@
             options: options
         });
 
-        var youngestClubChart = new Chart(youngestClub, {
+        var youngestPlayerChart = new Chart(youngestPlayer, {
             type: 'horizontalBar',
             data: {
-                labels: youngestClubs,
+                labels: youngestPlayers,
                 datasets: [{
-                    label: 'Club le plus récent',
+                    label: 'Joueur le plus jeune',
                     data: youngestValues,
                     backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
                     borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
@@ -383,12 +374,12 @@
             options: options
         });
 
-        var averageClubChart = new Chart(averageClub, {
+        var averagePlayerChart = new Chart(averagePlayer, {
             type: 'horizontalBar',
             data: {
                 labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
                 datasets: [{
-                    label: 'Age moyen',
+                    label: 'Age moyen des joueurs',
                     data: averageValues,
                     backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
                     borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
@@ -397,125 +388,7 @@
             },
             options: options
         });
-    });*/
-
-    /*$.get('data/geojson/players-complete.geojson', function(data) {
-
-        var oldestClub = document.getElementById("oldestClub");
-        var youngestClub = document.getElementById("youngestClub");
-        var averageClub = document.getElementById("averageClub");
-
-        var options = {
-            animation: { duration:1500 },
-            responsive:false,
-            maintainAspectRatio: false
-        };
-
-        var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000], youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
-        var oldestClubs = ["", "", "", "", "", ""], youngestClubs = ["", "", "", "", "", ""];
-        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
-
-        $.each(data.features, function (key, val) {
-
-            alert(val.properties.Name);
-
-            switch(val.properties.Country) {
-                case "England":
-                    getStatistics(englandAverage, "Angleterre - ", 0, val);
-                    break;
-                case "Spain":
-                    getStatistics(spainAverage, "Espagne - ", 2, val);
-                    break;
-                case "Germany":
-                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
-                    break;
-                case "Italy":
-                    getStatistics(italyAverage, "Italie - ", 3, val);
-                    break;
-                case "France":
-                    getStatistics(franceAverage, "France - ", 1, val);
-                    break;
-                case "Switzerland":
-                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
-                    break;
-                default:
-            }
-        });
-
-        oldestValues = [getAge(oldestValues[0]), getAge(oldestValues[1]), getAge(oldestValues[2]), getAge(oldestValues[3]), getAge(oldestValues[4]), getAge(oldestValues[5])];
-        youngestValues = [getAge(youngestValues[0]), getAge(youngestValues[1]), getAge(youngestValues[2]), getAge(youngestValues[3]), getAge(youngestValues[4]), getAge(youngestValues[5])];
-        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
-
-        function getAge(year) {
-            var date = new Date().getFullYear();
-            return date - year;
-        }
-
-        function getAverage(average) {
-            var sum = 0;
-            for(var i = 0; i < average.length; i++) {
-                sum += parseInt(average[i], 10);
-            }
-            return getAge(Math.round(sum/average.length));
-        }
-
-        function getStatistics(average, country, position, value) {
-            average.push(value.properties.Formed);
-            if(value.properties.Formed < oldestValues[position]) {
-                oldestValues[position] = value.properties.Formed;
-                oldestClubs[position] = country + value.properties.Club_Name;
-            }
-            if(value.properties.Formed > youngestValues[position]) {
-                youngestValues[position] = value.properties.Formed;
-                youngestClubs[position] = country + value.properties.Club_Name;
-            }
-        }
-
-        var oldestClubChart = new Chart(oldestClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: oldestClubs,
-                datasets: [{
-                    label: 'Club le plus ancien',
-                    data: oldestValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
-                }]
-            },
-            options: options
-        });
-
-        var youngestClubChart = new Chart(youngestClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: youngestClubs,
-                datasets: [{
-                    label: 'Club le plus récent',
-                    data: youngestValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
-                }]
-            },
-            options: options
-        });
-
-        var averageClubChart = new Chart(averageClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
-                datasets: [{
-                    label: 'Age moyen',
-                    data: averageValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
-                }]
-            },
-            options: options
-        });
-    });*/
+    });
 
 </script>
 </body>
