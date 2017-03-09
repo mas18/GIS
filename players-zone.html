@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="data/css/control.fullscreen.css" />
+    <link rel="stylesheet" href="data/css/zoneInfo.css"/>
+    <script src="data/js/control.fullscreen.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
+    <script src="data/js/players-complete.js"></script>
+    <script src="data/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="map" style="height: 600px; width: 800px"></div>
+<script>
+    var map = L.map('map', {
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }
+    });
+
+    // Layers
+    var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    }).addTo(map);
+    var club_locations;
+
+    var info = L.control({position: 'bottomright'});
+
+    $.get('data/geojson/players-pays.geojson', function(data) {
+        club_locations = new L.GeoJSON(data, {
+            onEachFeature: onEachFeatureZone,
+            style: basicStyleZone
+        });
+        map.addLayer(club_locations);
+        bounds = club_locations.getBounds();
+        map.fitBounds(bounds);
+    });
+
+    function getColor(points) {
+        if(points === 0)
+            return "#ffffff"
+        else if(points < 10)
+            return "#ffc7c8"
+        else if(points < 50)
+            return "#ff898b"
+        else if (points < 100)
+            return "#ff3b41"
+        else if (points < 200)
+            return "#f60010"
+        else if (points < 500)
+            return "#d40001"
+        else if (points < 1000)
+            return "#9c000f"
+        else if (points < 2000)
+            return "#5b0009"
+        else if (points < 3000)
+            return "#370005"
+        else
+            return "#000000"
+
+    }
+
+    function basicStyleZone(feature) {
+        return {
+            fillColor: getColor(feature.properties.NUMPOINTS),
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.5,
+            color: 'black',
+            dashArray: '3'
+        }
+    }
+
+    function onOverStyleZone (e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 3,
+            color: 'black',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+
+        info.update(layer.feature.properties);
+    }
+
+    function resetStyleZone(e) {
+        club_locations.resetStyle(e.target);
+        info.update();
+    }
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeatureZone(feature, layer) {
+        layer.on({
+            mouseover: onOverStyleZone,
+            mouseout: resetStyleZone,
+            click: zoomToFeature
+        });
+    }
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    info.update = function (p) {
+        this._div.innerHTML = '<h4>Nombre d\'équipe par région :</h4>' +  (p ?
+                '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' équipe(s)'
+                : 'Hover over a state');
+    };
+
+    info.addTo(map);
+
+</script>
+</body>
+</html>
