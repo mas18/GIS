@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Statistiques</title>
+    <link rel="stylesheet" href="data/css/stats.css"/>
     <script src="data/js/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
@@ -11,19 +12,68 @@
 </head>
 <body>
 
-<canvas id="oldestClub" width="600" height="400" style="float:left;"></canvas>
-<canvas id="youngestClub" width="600" height="400" style="float:left;"></canvas>
-<canvas id="averageClub" width="600" height="400" style="float:left;"></canvas>
+<button class="active btn" id="all">Toutes les statistiques</button>
+<button class="btn" id="a">Âge des clubs</button>
+<button class="btn" id="b">Capacité des stades</button>
+<button class="btn" id="c">Âge des joueurs</button>
+<button class="btn" id="d">Taille des joueurs</button>
+<button class="btn" id="e">Poids des joueurs</button>
+<button class="btn" id="f">Nombre de joueurs</button>
 
-<canvas id="highestCapacity" width="600" height="400" style="float:left;"></canvas>
-<canvas id="lowestCapacity" width="600" height="400" style="float:left;"></canvas>
-<canvas id="averageCapacity" width="600" height="400" style="float:left;"></canvas>
-
-<canvas id="oldestPlayer" width="600" height="400" style="float:left;"></canvas>
-<canvas id="youngestPlayer" width="600" height="400" style="float:left;"></canvas>
-<canvas id="averagePlayer" width="600" height="400" style="float:left;"></canvas>
+<!-- An element with an id is needed for the jQuery -->
+<div id="parent">
+    <!-- The base class is the box. Categories are then given as accessory classes. Any div can be in more than one category -->
+    <div class="box a">
+        <div class="title">Âge des clubs</div>
+        <canvas id="oldestClub" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="youngestClub" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="averageClub" width="600" height="400" style="float:left;"></canvas>
+    </div>
+    <div class="box b">
+        <div class="title">Capacité des stades</div>
+        <canvas id="highestCapacity" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="lowestCapacity" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="averageCapacity" width="600" height="400" style="float:left;"></canvas>
+    </div>
+    <div class="box c">
+        <div class="title">Âge des joueurs</div>
+        <canvas id="oldestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="youngestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="averagePlayer" width="600" height="400" style="float:left;"></canvas>
+    </div>
+    <div class="box d">
+        <div class="title">Taille des joueurs</div>
+        <canvas id="tallestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="smallestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="averageSizePlayer" width="600" height="400" style="float:left;"></canvas>
+    </div>
+    <div class="box e">
+        <div class="title">Poids des joueurs</div>
+        <canvas id="heaviestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="lightestPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="averageWeightPlayer" width="600" height="400" style="float:left;"></canvas>
+    </div>
+    <div class="box f">
+        <div class="title">Nombre de joueurs</div>
+        <canvas id="nbPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="nbLocalPlayer" width="600" height="400" style="float:left;"></canvas>
+        <canvas id="nbForeignPlayer" width="600" height="400" style="float:left;"></canvas>
+    </div>
+</div>
 
 <script>
+
+    // DISPLAY DIV
+    var $btns = $('.btn').click(function() {
+        if (this.id == 'all') {
+            $('#parent > div').fadeIn(450);
+        } else {
+            var $el = $('.' + this.id).fadeIn(450);
+            $('#parent > div').not($el).hide();
+        }
+        $btns.removeClass('active');
+        $(this).addClass('active');
+    })
 
     // CLUB AGE -------------------------------------------------------------------------------------
 
@@ -33,10 +83,28 @@
         var youngestClub = document.getElementById("youngestClub");
         var averageClub = document.getElementById("averageClub");
 
-        var options = {
+        var options1 = {
             animation: { duration:1500 },
             responsive:false,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Club le plus ancien' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Club le plus récent' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Âge moyen des clubs' },
+            legend: { display: true, position: 'bottom' }
         };
 
         var oldestValues = [10000, 10000, 10000, 10000, 10000, 10000], youngestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
@@ -96,50 +164,52 @@
             }
         }
 
-        var oldestClubChart = new Chart(oldestClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: oldestClubs,
-                datasets: [{
-                    label: 'Club le plus ancien',
-                    data: oldestValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
-                }]
-            },
-            options: options
+        var oldestClubChart = {
+            datasets: [{
+                data: oldestValues,
+                backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
+            }],
+            labels: oldestClubs
+        };
+
+        new Chart(oldestClub, {
+            data: oldestClubChart,
+            type: 'doughnut',
+            options: options1
         });
 
-        var youngestClubChart = new Chart(youngestClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: youngestClubs,
-                datasets: [{
-                    label: 'Club le plus récent',
-                    data: youngestValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
-                }]
-            },
-            options: options
+        var youngestClubChart = {
+            datasets: [{
+                data: youngestValues,
+                backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
+            }],
+            labels: youngestClubs
+        };
+
+        new Chart(youngestClub, {
+            data: youngestClubChart,
+            type: 'doughnut',
+            options: options2
         });
 
-        var averageClubChart = new Chart(averageClub, {
-            type: 'horizontalBar',
-            data: {
-                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
-                datasets: [{
-                    label: 'Age moyen',
+        var averageClubChart = {
+            labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+            datasets: [
+                {
                     data: averageValues,
-                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
-                    borderWidth: 1
+                    backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                    hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
                 }]
-            },
-            options: options
+        };
+
+        new Chart(averageClub,{
+            type: 'doughnut',
+            data: averageClubChart,
+            options: options3
         });
+
     });
 
     // STADIUM CAPACITY -------------------------------------------------------------------------------------
@@ -150,10 +220,28 @@
         var lowestCapacity = document.getElementById("lowestCapacity");
         var averageCapacity = document.getElementById("averageCapacity");
 
-        var options = {
+        var options1 = {
             animation: { duration:1500 },
             responsive:false,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Stade le plus grand' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Stade le plus petit' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Taille moyenne des stades' },
+            legend: { display: true, position: 'bottom' }
         };
 
         var lowestValues = [100000, 100000, 100000, 100000, 100000, 100000], highestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
@@ -218,7 +306,7 @@
         new Chart(highestCapacity, {
             data: highestCapacityChart,
             type: 'polarArea',
-            options: options
+            options: options1
         });
 
         var lowestCapacityChart = {
@@ -233,7 +321,7 @@
         new Chart(lowestCapacity, {
             data: lowestCapacityChart,
             type: 'polarArea',
-            options: options
+            options: options2
         });
 
         var averageCapacityChart = {
@@ -248,7 +336,7 @@
         new Chart(averageCapacity, {
             data: averageCapacityChart,
             type: 'polarArea',
-            options: options
+            options: options3
         });
     });
 
@@ -260,10 +348,48 @@
         var youngestPlayer = document.getElementById("youngestPlayer");
         var averagePlayer = document.getElementById("averagePlayer");
 
-        var options = {
+        var options1 = {
             animation: { duration:1500 },
             responsive:false,
             maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            title: { display: true, fontsize: 14, text: 'Joueur le plus jeune' },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueur le plus âgé' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            title: { display: true, fontsize: 14, text: 'Âge moyen des joueurs' },
             scales: {
                 xAxes: [{
                     ticks: {
@@ -324,12 +450,11 @@
         }
 
         function getAverage(average) {
-            alert(average);
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
                 sum += parseInt(average[i], 10);
             }
-            return Math.round(sum/average.length);
+            return Math.round(sum/average.length * 100) / 100;
         }
 
         function getStatistics(average, country, position, value) {
@@ -356,7 +481,7 @@
                     borderWidth: 1
                 }]
             },
-            options: options
+            options: options1
         });
 
         var youngestPlayerChart = new Chart(youngestPlayer, {
@@ -371,7 +496,7 @@
                     borderWidth: 1
                 }]
             },
-            options: options
+            options: options2
         });
 
         var averagePlayerChart = new Chart(averagePlayer, {
@@ -386,7 +511,452 @@
                     borderWidth: 1
                 }]
             },
-            options: options
+            options: options3
+        });
+    });
+
+    // PLAYERS HEIGHT -------------------------------------------------------------------------------------
+
+    $.get('data/geojson/players-complete.geojson', function(data) {
+
+        var tallestPlayer = document.getElementById("tallestPlayer");
+        var smallestPlayer = document.getElementById("smallestPlayer");
+        var averageSizePlayer = document.getElementById("averageSizePlayer");
+
+        var options1 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueur le plus grand' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueur le plus petit' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Taille moyenne des joueurs' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var smallestValues = [100000, 100000, 100000, 100000, 100000, 100000], tallestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var smallestPlayers = ["", "", "", "", "", ""], tallestPlayers = ["", "", "", "", "", ""];
+        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
+
+        $.each(data.features, function (key, val) {
+            switch(val.properties.Country) {
+                case "England":
+                    getStatistics(englandAverage, "Angleterre - ", 0, val);
+                    break;
+                case "Spain":
+                    getStatistics(spainAverage, "Espagne - ", 2, val);
+                    break;
+                case "Germany":
+                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
+                    break;
+                case "Italy":
+                    getStatistics(italyAverage, "Italie - ", 3, val);
+                    break;
+                case "France":
+                    getStatistics(franceAverage, "France - ", 1, val);
+                    break;
+                case "Switzerland":
+                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
+                    break;
+                default:
+            }
+        });
+
+        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
+
+        function getAverage(average) {
+            var sum = 0;
+            for(var i = 0; i < average.length; i++) {
+                sum += average[i], 10;
+            }
+            return Math.round(sum/average.length * 100) / 100;
+        }
+
+        function getStatistics(average, country, position, value) {
+            if(value.properties.Height != null) {
+                average.push(value.properties.Height);
+                if(value.properties.Height > tallestValues[position]) {
+                    tallestValues[position] = value.properties.Height;
+                    tallestPlayers[position] = country + value.properties.Name;
+                }
+                if(value.properties.Height < smallestValues[position]) {
+                    smallestValues[position] = value.properties.Height;
+                    smallestPlayers[position] = country + value.properties.Name;
+                }
+            }
+        }
+
+        var tallestPlayerChart = new Chart(tallestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: tallestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus grand',
+                    data: tallestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options1
+        });
+
+        var smallestPlayerChart = new Chart(smallestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: smallestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus petit',
+                    data: smallestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options2
+        });
+
+        var averageSizePlayerChart = new Chart(averageSizePlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+                datasets: [{
+                    label: 'Taille moyenne des joueurs',
+                    data: averageValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options3
+        });
+    });
+
+    // PLAYERS WEIGHT -------------------------------------------------------------------------------------
+
+    $.get('data/geojson/players-complete.geojson', function(data) {
+
+        var heaviestPlayer = document.getElementById("heaviestPlayer");
+        var lightestPlayer = document.getElementById("lightestPlayer");
+        var averageWeightPlayer = document.getElementById("averageWeightPlayer");
+
+        var options1 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueur le plus lourd' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueur le plus léger' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Poids moyen des joueurs' },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var lightestValues = [100000, 100000, 100000, 100000, 100000, 100000], heaviestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var lightestPlayers = ["", "", "", "", "", ""], heaviestPlayers = ["", "", "", "", "", ""];
+        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
+
+        $.each(data.features, function (key, val) {
+            switch(val.properties.Country) {
+                case "England":
+                    getStatistics(englandAverage, "Angleterre - ", 0, val);
+                    break;
+                case "Spain":
+                    getStatistics(spainAverage, "Espagne - ", 2, val);
+                    break;
+                case "Germany":
+                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
+                    break;
+                case "Italy":
+                    getStatistics(italyAverage, "Italie - ", 3, val);
+                    break;
+                case "France":
+                    getStatistics(franceAverage, "France - ", 1, val);
+                    break;
+                case "Switzerland":
+                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
+                    break;
+                default:
+            }
+        });
+
+        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
+
+        function getAverage(average) {
+            var sum = 0;
+            for(var i = 0; i < average.length; i++) {
+                sum += average[i], 10;
+            }
+            return Math.round(sum/average.length);
+        }
+
+        function getStatistics(average, country, position, value) {
+            if(value.properties.Weight != null) {
+                average.push(value.properties.Weight);
+                if(value.properties.Weight > heaviestValues[position]) {
+                    heaviestValues[position] = value.properties.Weight;
+                    heaviestPlayers[position] = country + value.properties.Name;
+                }
+                if(value.properties.Weight < lightestValues[position]) {
+                    lightestValues[position] = value.properties.Weight;
+                    lightestPlayers[position] = country + value.properties.Name;
+                }
+            }
+        }
+
+        var heaviestPlayerChart = new Chart(heaviestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: heaviestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus lourd',
+                    data: heaviestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options1
+        });
+
+        var lightestPlayerChart = new Chart(lightestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: lightestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus léger',
+                    data: lightestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options2
+        });
+
+        var averageWeightPlayerChart = new Chart(averageWeightPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+                datasets: [{
+                    label: 'Poids moyen des joueurs',
+                    data: averageValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options3
+        });
+    });
+
+    // PLAYERS PER CHAMPIONSHIP -------------------------------------------------------------------------------------
+
+    $.get('data/geojson/players-complete.geojson', function(data) {
+
+        var nbPlayer = document.getElementById("nbPlayer");
+        var nbLocalPlayer = document.getElementById("nbLocalPlayer");
+        var nbForeignPlayer = document.getElementById("nbForeignPlayer");
+
+        var options1 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Nombre total de joueurs' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options2 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueurs locaux' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var options3 = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            title: { display: true, fontsize: 14, text: 'Joueurs étrangers' },
+            legend: { display: true, position: 'bottom' }
+        };
+
+        var averageValues = [0, 0, 0, 0, 0, 0], localValues = [0, 0, 0, 0, 0, 0], foreignValues = [0, 0, 0, 0, 0, 0];
+
+        $.each(data.features, function (key, val) {
+            switch(val.properties.Country) {
+                case "England":
+                    averageValues[0]++;
+                    if(val.properties.Nat == "Angleterre")
+                        localValues[0]++;
+                    else
+                        foreignValues[0]++;
+                    break;
+                case "Spain":
+                    averageValues[2]++;
+                    if(val.properties.Nat == "Espagne")
+                        localValues[2]++;
+                    else
+                        foreignValues[2]++;
+                    break;
+                case "Germany":
+                    averageValues[4]++;
+                    if(val.properties.Nat == "Allemagne")
+                        localValues[4]++;
+                    else
+                        foreignValues[4]++;
+                    break;
+                case "Italy":
+                    averageValues[3]++;
+                    if(val.properties.Nat == "Italie")
+                        localValues[3]++;
+                    else
+                        foreignValues[3]++;
+                    break;
+                case "France":
+                    averageValues[1]++;
+                    if(val.properties.Nat == "France")
+                        localValues[1]++;
+                    else
+                        foreignValues[1]++;
+                    break;
+                case "Switzerland":
+                    averageValues[5]++;
+                    if(val.properties.Nat == "Suisse")
+                        localValues[5]++;
+                    else
+                        foreignValues[5]++;
+                    break;
+                default:
+            }
+        });
+
+        var nbPlayerChart = {
+            labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+            datasets: [
+                {
+                    data: averageValues,
+                    backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                    hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
+                }]
+        };
+
+        new Chart(nbPlayer,{
+            type: 'pie',
+            data: nbPlayerChart,
+            options: options1
+        });
+
+        var nbLocalPlayerChart = {
+            labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+            datasets: [
+                {
+                    data: localValues,
+                    backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                    hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
+                }]
+        };
+
+        new Chart(nbLocalPlayer,{
+            type: 'pie',
+            data: nbLocalPlayerChart,
+            options: options2
+        });
+
+        var nbForeignPlayerChart = {
+            labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+            datasets: [
+                {
+                    data: foreignValues,
+                    backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                    hoverBackgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ]
+                }]
+        };
+
+        new Chart(nbForeignPlayer,{
+            type: 'pie',
+            data: nbForeignPlayerChart,
+            options: options3
         });
     });
 
