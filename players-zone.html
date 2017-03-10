@@ -40,6 +40,16 @@
         map.fitBounds(bounds);
     });
 
+    $.get('data/geojson/players-angleterre.geojson', function(data) {
+        england = new L.GeoJSON(data, {
+            onEachFeature: onEachFeatureZone,
+            style: basicStyleZone
+        });
+        map.addLayer(england);
+        bounds = england.getBounds();
+        england.bringToFront();
+    });
+
     function getColor(points) {
         if(points === 0)
             return "#ffffff"
@@ -188,19 +198,19 @@
                     bounds = italy.getBounds();
                 }
             }
-            if(!map.hasLayer(england)) {
-                if(england == null) {
+            if(!map.hasLayer(england2)) {
+                if(england2 == null) {
                     $.get('data/geojson/players-angleterre2.geojson', function(data) {
-                        england = new L.GeoJSON(data, {
+                        england2 = new L.GeoJSON(data, {
                             onEachFeature: onEachFeatureZone,
                             style: basicStyleZone
                         });
-                        map.addLayer(england);
-                        bounds = england.getBounds();
+                        map.addLayer(england2);
+                        bounds = england2.getBounds();
                     });
                 } else {
-                    map.addLayer(england);
-                    bounds = england.getBounds();
+                    map.addLayer(england2);
+                    bounds = england2.getBounds();
                 }
             }
             if(!map.hasLayer(switzerland)) {
@@ -228,8 +238,8 @@
                 map.removeLayer(germany);
             if(map.hasLayer(italy))
                 map.removeLayer(italy);
-            if(map.hasLayer(england))
-                map.removeLayer(england);
+            if(map.hasLayer(england2))
+                map.removeLayer(england2);
             if(map.hasLayer(switzerland))
                 map.removeLayer(switzerland);
         }
