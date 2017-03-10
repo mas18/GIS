@@ -26,8 +26,9 @@
     var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
     var club_locations;
+    var france, spain, germany, italy, england, england2, switzerland;
 
-    var info = L.control({position: 'bottomright'});
+    var info = L.control();
 
     $.get('data/geojson/players-pays.geojson', function(data) {
         club_locations = new L.GeoJSON(data, {
@@ -67,7 +68,7 @@
         return {
             fillColor: getColor(feature.properties.NUMPOINTS),
             weight: 1,
-            opacity: 1,
+            opacity: 0.5,
             fillOpacity: 0.5,
             color: 'black',
             dashArray: '3'
@@ -81,12 +82,13 @@
             weight: 3,
             color: 'black',
             dashArray: '',
-            fillOpacity: 0.7
+            fillOpacity: 0.7,
+            opacity: 0.7
         });
 
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        /*if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
             layer.bringToFront();
-        }
+        }*/
 
         info.update(layer.feature.properties);
     }
@@ -116,12 +118,122 @@
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (p) {
-        this._div.innerHTML = '<h4>Nombre d\'équipe par région :</h4>' +  (p ?
-                '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' équipe(s)'
+        this._div.innerHTML = '<h4>Nombre de joueurs par région :</h4>' +  (p ?
+                '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' joueur(s)'
                 : 'Hover over a state');
     };
 
     info.addTo(map);
+
+    // Zoom on map
+    map.on('zoomend', function() {
+        if(map.getZoom() >= 5) {
+            if(!map.hasLayer(france)) {
+                if(france == null) {
+                    $.get('data/geojson/players-france.geojson', function(data) {
+                        france = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(france);
+                        bounds = france.getBounds();
+                    });
+                } else {
+                    map.addLayer(france);
+                    bounds = france.getBounds();
+                }
+            }
+            if(!map.hasLayer(spain)) {
+                if(spain == null) {
+                    $.get('data/geojson/players-espagne.geojson', function(data) {
+                        spain = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(spain);
+                        bounds = spain.getBounds();
+                    });
+                } else {
+                    map.addLayer(spain);
+                    bounds = spain.getBounds();
+                }
+            }
+            if(!map.hasLayer(germany)) {
+                if(germany == null) {
+                    $.get('data/geojson/players-allemagne.geojson', function(data) {
+                        germany = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(germany);
+                        bounds = germany.getBounds();
+                    });
+                } else {
+                    map.addLayer(germany);
+                    bounds = germany.getBounds();
+                }
+            }
+            if(!map.hasLayer(italy)) {
+                if(italy == null) {
+                    $.get('data/geojson/players-italie.geojson', function(data) {
+                        italy = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(italy);
+                        bounds = italy.getBounds();
+                    });
+                } else {
+                    map.addLayer(italy);
+                    bounds = italy.getBounds();
+                }
+            }
+            if(!map.hasLayer(england)) {
+                if(england == null) {
+                    $.get('data/geojson/players-angleterre2.geojson', function(data) {
+                        england = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(england);
+                        bounds = england.getBounds();
+                    });
+                } else {
+                    map.addLayer(england);
+                    bounds = england.getBounds();
+                }
+            }
+            if(!map.hasLayer(switzerland)) {
+                if(switzerland == null) {
+                    $.get('data/geojson/players-suisse.geojson', function(data) {
+                        switzerland = new L.GeoJSON(data, {
+                            onEachFeature: onEachFeatureZone,
+                            style: basicStyleZone
+                        });
+                        map.addLayer(switzerland);
+                        bounds = switzerland.getBounds();
+                    });
+                } else {
+                    map.addLayer(switzerland);
+                    bounds = switzerland.getBounds();
+                }
+            }
+        }
+        else if(map.getZoom() < 5) {
+            if(map.hasLayer(france))
+                map.removeLayer(france);
+            if(map.hasLayer(spain))
+                map.removeLayer(spain);
+            if(map.hasLayer(germany))
+                map.removeLayer(germany);
+            if(map.hasLayer(italy))
+                map.removeLayer(italy);
+            if(map.hasLayer(england))
+                map.removeLayer(england);
+            if(map.hasLayer(switzerland))
+                map.removeLayer(switzerland);
+        }
+    });
 
 </script>
 </body>
