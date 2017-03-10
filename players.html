@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="data/css/control.fullscreen.css" />
+    <link rel="stylesheet" href="data/css/zoneInfo.css"/>
+    <script src="data/js/control.fullscreen.js"></script>
+    <script src="data/js/leaflet-heat.js"></script>
+    <script src="data/js/stade-complete.js"></script>
+    <script src="data/js/player-complete.js"></script>
+    <script src="data/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="map" style="height: 600px; width: 800px">
+    <div id="controller" style="position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: white;
+        padding: 1em;" class="leaflet-bar">
+        <label>
+            Ligue:
+            <select id="league">
+                <!-- make sure to encase string values in single quotes for valid sql -->
+                <option value="All">Tous</option>
+                <option value="England">Premier League</option>
+                <option value="Spain">Liga BBVA</option>
+                <option value="Germany">Bundesliga</option>
+                <option value="France">Ligue 1</option>
+                <option value="Italy">Serie A</option>
+                <option value="Switzerland">Super League</option>
+            </select>
+        </label>
+
+        <label>
+            Équipes:
+            <select disabled id="clubs">
+                <option value="All">Tous</option>
+            </select>
+        </label>
+
+        <label>
+            Affichage:
+            <select id="view">
+                <!-- make sure to encase string values in single quotes for valid sql -->
+                <option value="Standard">Normal</option>
+                <option value="Stade-Locations">Clubs par Région</option>
+                <option value="Stade-Size">Grandeur des Stades</option>
+                <option value="Heatmap">Heatmap</option>
+
+            </select>
+        </label>
+    </div>
+</div>
+<script>
+    var map = L.map('map', {
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }
+    }).setView([46.368725, 7.312521], 4);
+
+    // Controllers
+    var controlPanel = document.getElementById('controller');
+    var league = document.getElementById('league');
+    var sel_clubs = document.getElementById('clubs');
+    var view = document.getElementById('view');
+    var clubs = [];
+
+    var club_Json;
+
+    // Layer
+    var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    }).addTo(map);
+    var heatmap;
+
+    // Heatmap data
+    var heatmap_data;
+    var data;
+
+    // Zone info
+    var info = L.control({position: 'bottomright'});
+
+    // Listeners
+    league.addEventListener('change', function(){
+        clubs = [];
+        cleanClubs();
+        // Enable / disable Club selection
+        if(league.value === "All"){
+            sel_clubs.value='All';
+            sel_clubs.disabled=true;
+        } else{
+            sel_clubs.disabled=false;
+            club_Json = L.geoJson(stadions, {
+                filter: function (feature, layer) {
+                    return feature.properties.Country_Club === league.value;
+                },
+                onEachFeature: clubList
+            });
+            insertClub();
+        }
+
+        //
+    })
+
+    function cleanClubs(){
+        for (i=sel_clubs.length - 1; i > 0;  i--) {
+            sel_clubs.remove(i);
+        }
+    }
+
+    function insertClub(){
+
+        // Loop through the array
+        for (var i = 0; i < clubs.length; ++i) {
+            // Append the element to the end of Array list
+            sel_clubs[sel_clubs.length] = new Option(clubs[i], clubs[i]);
+        }
+    }
+    controlPanel.addEventListener('change', function(){
+        removeLayers();
+        getView();
+    });
+
+
+
+    // Functions
+    function removeLayers(){
+        if (map.hasLayer(heatmap)){
+            heatmap.remove();
+            heatmap_data.remove();
+        }
+    }
+
+    function getView(){
+        switch (view.value) {
+            case "Standard":
+                standardLayer();
+                break;
+            case "Stade-Locations":
+                locationLayer();
+                break;
+            case "Stade-Size":
+                sizeLayer();
+                break;
+            case "Heatmap":
+                heatmapLayer();
+                break;
+            default:
+                break;
+        }
+    }
+
+    function heatmapLayer(){
+        data = [];
+
+        heatmap_data = L.geoJson(allPlayers, {
+                onEachFeature: manageClubs
+        });
+
+        heatmap = L.heatLayer(data, {radius: 25, blur: 15, maxZoom: 17}).addTo(map);
+
+        bounds = heatmap_data.getBounds();
+        map.fitBounds(bounds);
+
+    }
+
+    function manageClubs (feature, layer){
+        var point = new Array();
+        point[0] = feature.properties.Latitude;
+        point[1] = feature.properties.Longitude;
+        point[2] = 40;
+        data.push(point);
+    }
+
+    function clubList(feature) {
+        clubs.push(feature.properties.Club_Name);
+    }
+
+    function playerPopup(feature, layer){
+        layer.bindPopup("<h4> "+ feature.properties.Name + "</h4>");
+    }
+</script>
+</body>
+</html>

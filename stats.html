@@ -11,11 +11,21 @@
 </head>
 <body>
 
-<canvas id="oldestClub" width="600" height="200" style="float:left;"></canvas>
-<canvas id="youngestClub" width="600" height="200" style="float:left;"></canvas>
-<canvas id="averageClub" width="600" height="200" style="float:left;"></canvas>
+<canvas id="oldestClub" width="600" height="400" style="float:left;"></canvas>
+<canvas id="youngestClub" width="600" height="400" style="float:left;"></canvas>
+<canvas id="averageClub" width="600" height="400" style="float:left;"></canvas>
+
+<canvas id="highestCapacity" width="600" height="400" style="float:left;"></canvas>
+<canvas id="lowestCapacity" width="600" height="400" style="float:left;"></canvas>
+<canvas id="averageCapacity" width="600" height="400" style="float:left;"></canvas>
+
+<canvas id="oldestPlayer" width="600" height="400" style="float:left;"></canvas>
+<canvas id="youngestPlayer" width="600" height="400" style="float:left;"></canvas>
+<canvas id="averagePlayer" width="600" height="400" style="float:left;"></canvas>
 
 <script>
+
+    // CLUB AGE -------------------------------------------------------------------------------------
 
     $.get('data/geojson/stade-complete.geojson', function(data) {
 
@@ -122,6 +132,254 @@
                 labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
                 datasets: [{
                     label: 'Age moyen',
+                    data: averageValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+    });
+
+    // STADIUM CAPACITY -------------------------------------------------------------------------------------
+
+    $.get('data/geojson/stade-complete.geojson', function(data) {
+
+        var highestCapacity = document.getElementById("highestCapacity");
+        var lowestCapacity = document.getElementById("lowestCapacity");
+        var averageCapacity = document.getElementById("averageCapacity");
+
+        var options = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false
+        };
+
+        var lowestValues = [100000, 100000, 100000, 100000, 100000, 100000], highestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var lowestStadium = ["", "", "", "", "", ""], highestStadium = ["", "", "", "", "", ""];
+        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
+
+        $.each(data.features, function (key, val) {
+            switch(val.properties.Country) {
+                case "England":
+                    getStatistics(englandAverage, "Angleterre - ", 0, val);
+                    break;
+                case "Spain":
+                    getStatistics(spainAverage, "Espagne - ", 2, val);
+                    break;
+                case "Germany":
+                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
+                    break;
+                case "Italy":
+                    getStatistics(italyAverage, "Italie - ", 3, val);
+                    break;
+                case "France":
+                    getStatistics(franceAverage, "France - ", 1, val);
+                    break;
+                case "Switzerland":
+                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
+                    break;
+                default:
+            }
+        });
+
+        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
+
+        function getAverage(average) {
+            var sum = 0;
+            for(var i = 0; i < average.length; i++) {
+                sum += parseInt(average[i], 10);
+            }
+            return Math.round(sum/average.length);
+        }
+
+        function getStatistics(average, country, position, value) {
+            average.push(value.properties.Capacity);
+            if(value.properties.Capacity > highestValues[position]) {
+                highestValues[position] = value.properties.Capacity;
+                highestStadium[position] = country + value.properties.Club_Name;
+            }
+            if(value.properties.Capacity < lowestValues[position]) {
+                lowestValues[position] = value.properties.Capacity;
+                lowestStadium[position] = country + value.properties.Club_Name;
+            }
+        }
+
+        var highestCapacityChart = {
+            datasets: [{
+                data: highestValues,
+                backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                label: 'Stade le plus grand'
+            }],
+            labels: highestStadium
+        };
+
+        new Chart(highestCapacity, {
+            data: highestCapacityChart,
+            type: 'polarArea',
+            options: options
+        });
+
+        var lowestCapacityChart = {
+            datasets: [{
+                data: lowestValues,
+                backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                label: 'Stade le plus petit'
+            }],
+            labels: lowestStadium
+        };
+
+        new Chart(lowestCapacity, {
+            data: lowestCapacityChart,
+            type: 'polarArea',
+            options: options
+        });
+
+        var averageCapacityChart = {
+            datasets: [{
+                data: averageValues,
+                backgroundColor: [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#cf75ed", "#eba45d" ],
+                label: 'Moyenne capacité des stades'
+            }],
+            labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"]
+        };
+
+        new Chart(averageCapacity, {
+            data: averageCapacityChart,
+            type: 'polarArea',
+            options: options
+        });
+    });
+
+    // PLAYERS AGE -------------------------------------------------------------------------------------
+
+    $.get('data/geojson/players-complete.geojson', function(data) {
+
+        var oldestPlayer = document.getElementById("oldestPlayer");
+        var youngestPlayer = document.getElementById("youngestPlayer");
+        var averagePlayer = document.getElementById("averagePlayer");
+
+        var options = {
+            animation: { duration:1500 },
+            responsive:false,
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
+
+        var youngestValues = [10000, 10000, 10000, 10000, 10000, 10000], oldestValues = [-10000, -10000, -10000, -10000, -10000, -10000];
+        var oldestPlayers = ["", "", "", "", "", ""], youngestPlayers = ["", "", "", "", "", ""];
+        var englandAverage = new Array(), franceAverage = new Array(), spainAverage = new Array(), italyAverage = new Array(), germanyAverage = new Array(), switzerlandAverage = new Array();
+
+        $.each(data.features, function (key, val) {
+            switch(val.properties.Country) {
+                case "England":
+                    getStatistics(englandAverage, "Angleterre - ", 0, val);
+                    break;
+                case "Spain":
+                    getStatistics(spainAverage, "Espagne - ", 2, val);
+                    break;
+                case "Germany":
+                    getStatistics(germanyAverage, "Allemagne - ", 4, val);
+                    break;
+                case "Italy":
+                    getStatistics(italyAverage, "Italie - ", 3, val);
+                    break;
+                case "France":
+                    getStatistics(franceAverage, "France - ", 1, val);
+                    break;
+                case "Switzerland":
+                    getStatistics(switzerlandAverage, "Suisse - ", 5, val);
+                    break;
+                default:
+            }
+        });
+
+        averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
+
+        function getAge(dateString)
+        {
+            var year = "00";
+            if(dateString.substring(6, 8) < 50)
+                year = "20";
+            else
+                year = "19";
+            var newDate = year + dateString.substring(6, 8) + "-" + dateString.substring(3, 5) + "-" + dateString.substring(0, 2);
+
+            var today = new Date();
+            var birthDate = new Date(newDate);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+            {
+                age--;
+            }
+            return age;
+        }
+
+        function getAverage(average) {
+            alert(average);
+            var sum = 0;
+            for(var i = 0; i < average.length; i++) {
+                sum += parseInt(average[i], 10);
+            }
+            return Math.round(sum/average.length);
+        }
+
+        function getStatistics(average, country, position, value) {
+            average.push(getAge(value.properties.Date_of_Birth));
+            if(getAge(value.properties.Date_of_Birth) > oldestValues[position]) {
+                oldestValues[position] = getAge(value.properties.Date_of_Birth);
+                oldestPlayers[position] = country + value.properties.Name;
+            }
+            if(getAge(value.properties.Date_of_Birth) < youngestValues[position]) {
+                youngestValues[position] = getAge(value.properties.Date_of_Birth);
+                youngestPlayers[position] = country + value.properties.Name;
+            }
+        }
+
+        var oldestPlayerChart = new Chart(oldestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: oldestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus âgé',
+                    data: oldestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+
+        var youngestPlayerChart = new Chart(youngestPlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: youngestPlayers,
+                datasets: [{
+                    label: 'Joueur le plus jeune',
+                    data: youngestValues,
+                    backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+                    borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+                    borderWidth: 1
+                }]
+            },
+            options: options
+        });
+
+        var averagePlayerChart = new Chart(averagePlayer, {
+            type: 'horizontalBar',
+            data: {
+                labels: ["Angleterre", "France", "Espagne", "Italie", "Allemagne", "Suisse"],
+                datasets: [{
+                    label: 'Age moyen des joueurs',
                     data: averageValues,
                     backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
                     borderColor: [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
