@@ -15,17 +15,29 @@
 </head>
 <body>
 <div id="map" style="height: 600px; width: 800px">
+
     <div id="controller" style="position: absolute;
-        top: 10px;
-        right: 10px;
+        bottom: 0px;
         z-index: 1000;
+        width: 100%;
         background: white;
-        padding: 1em;" class="leaflet-bar">
+        font-size: 0.8em;
+        padding: 0.5em;" class="leaflet-bar">
+        <label>
+            Affichage:
+            <select id="view">
+                <!-- make sure to encase string values in single quotes for valid sql -->
+                <option value="Standard">Normal</option>
+                <option value="Player-Locations">Joueurs par Région</option>
+                <option value="Heatmap">Heatmap</option>
+            </select>
+        </label>
+
         <label>
             Ligue:
             <select id="league">
                 <!-- make sure to encase string values in single quotes for valid sql -->
-                <option value="All">Tous</option>
+                <option value="All">Aucun</option>
                 <option value="England">Premier League</option>
                 <option value="Spain">Liga BBVA</option>
                 <option value="Germany">Bundesliga</option>
@@ -38,21 +50,11 @@
         <label>
             Équipes:
             <select disabled id="clubs">
-                <option value="All">Tous</option>
+                <option value="All">Aucune</option>
             </select>
         </label>
 
-        <label>
-            Affichage:
-            <select id="view">
-                <!-- make sure to encase string values in single quotes for valid sql -->
-                <option value="Standard">Normal</option>
-                <option value="Stade-Locations">Clubs par Région</option>
-                <option value="Stade-Size">Grandeur des Stades</option>
-                <option value="Heatmap">Heatmap</option>
 
-            </select>
-        </label>
     </div>
 </div>
 <script>
@@ -68,25 +70,35 @@
     var league = document.getElementById('league');
     var sel_clubs = document.getElementById('clubs');
     var view = document.getElementById('view');
-    var clubs = [];
+    var clubs;
 
     var club_Json;
 
     // Layer
     var baseLayer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
+    var player;
     var heatmap;
+    var club_locations;
+    var france, spain, germany, italy, england, england2, switzerland;
+
+    var info = L.control();
+
+
+
+    // Bounds
+    var bounds;
 
     // Heatmap data
     var heatmap_data;
     var data;
+    var intensity;
 
     // Zone info
     var info = L.control({position: 'bottomright'});
 
     // Listeners
     league.addEventListener('change', function(){
-        clubs = [];
         cleanClubs();
         // Enable / disable Club selection
         if(league.value === "All"){
@@ -102,15 +114,27 @@
             });
             insertClub();
         }
+    });
 
-        //
-    })
+    controlPanel.addEventListener('change', function(){
+        if(view.value != "Standard"){
+            league.firstElementChild.text = "Tous";
+            sel_clubs.firstElementChild.text = "Tous";
+        } else {
+            league.firstElementChild.text = "Aucun";
+            sel_clubs.firstElementChild.text = "Aucune";
+        }
+        removeLayers();
+        getView();
+    });
+
 
     function cleanClubs(){
+        clubs = [];
         for (i=sel_clubs.length - 1; i > 0;  i--) {
             sel_clubs.remove(i);
         }
-    }
+    };
 
     function insertClub(){
 
@@ -120,31 +144,47 @@
             sel_clubs[sel_clubs.length] = new Option(clubs[i], clubs[i]);
         }
     }
-    controlPanel.addEventListener('change', function(){
-        removeLayers();
-        getView();
+
+    $.get('data/geojson/players-angleterre.geojson', function(data) {
+        england = new L.GeoJSON(data, {
+            onEachFeature: onEachFeatureZone,
+            style: basicStyleZone
+        });
+
+    });
+    $.get('data/geojson/players-pays.geojson', function(data) {
+        club_locations = new L.GeoJSON(data, {
+            onEachFeature: onEachFeatureZone,
+            style: basicStyleZone
+        });
+
+        bounds = club_locations.getBounds();
+        map.fitBounds(bounds);
+
     });
 
 
 
     // Functions
     function removeLayers(){
-        if (map.hasLayer(heatmap)){
+        if(map.hasLayer(player)){
+            player.remove();
+        } else if(map.hasLayer(club_locations)){
+            club_locations.remove();
+            removeCountryLayers();
+        } else if (map.hasLayer(heatmap)){
             heatmap.remove();
             heatmap_data.remove();
         }
-    }
+    };
 
     function getView(){
         switch (view.value) {
             case "Standard":
                 standardLayer();
                 break;
-            case "Stade-Locations":
+            case "Player-Locations":
                 locationLayer();
-                break;
-            case "Stade-Size":
-                sizeLayer();
                 break;
             case "Heatmap":
                 heatmapLayer();
@@ -152,14 +192,57 @@
             default:
                 break;
         }
+    };
+
+
+
+    function standardLayer(){
+        if (sel_clubs != "All"){
+            player = L.geoJson(allPlayers, {
+                onEachFeature: playerPopup,
+                filter: function (feature, layer) {
+                    return feature.properties.Current_Club === sel_clubs.value;
+                }
+            }).addTo(map);
+
+            bounds = player.getBounds();
+            map.fitBounds(player);
+        }
+
+    }
+
+
+    function locationLayer(){
+        map.addLayer(club_locations);
+        map.addLayer(england);
     }
 
     function heatmapLayer(){
         data = [];
-
-        heatmap_data = L.geoJson(allPlayers, {
-                onEachFeature: manageClubs
-        });
+        intensity = 1;
+        if(league.value != "All") {
+            if(sel_clubs.value != "All"){
+                intensity = 10;
+                heatmap_data = L.geoJson(allPlayers, {
+                    onEachFeature: managePlayers,
+                    filter: function (feature, layer) {
+                        return feature.properties.Current_Club === sel_clubs.value;
+                    }
+                });
+            } else {
+                intensity = 4;
+                heatmap_data = L.geoJson(allPlayers, {
+                    onEachFeature: managePlayers,
+                    filter: function (feature, layer) {
+                        return feature.properties.Country === league.value;
+                    }
+                });
+            }
+        } else {
+            heatmap_data = L.geoJson(allPlayers, {
+                onEachFeature: managePlayers
+            });
+        }
 
         heatmap = L.heatLayer(data, {radius: 25, blur: 15, maxZoom: 17}).addTo(map);
 
@@ -167,13 +250,216 @@
         map.fitBounds(bounds);
 
     }
+    function getColor(points) {
+        if(points === 0)
+            return "#ffffff"
+        else if(points < 10)
+            return "#ffc7c8"
+        else if(points < 50)
+            return "#ff898b"
+        else if (points < 100)
+            return "#ff3b41"
+        else if (points < 200)
+            return "#f60010"
+        else if (points < 500)
+            return "#d40001"
+        else if (points < 1000)
+            return "#9c000f"
+        else if (points < 2000)
+            return "#5b0009"
+        else if (points < 3000)
+            return "#370005"
+        else
+            return "#000000"
 
-    function manageClubs (feature, layer){
+    }
+
+    function basicStyleZone(feature) {
+        return {
+            fillColor: getColor(feature.properties.NUMPOINTS),
+            weight: 1,
+            opacity: 0.5,
+            fillOpacity: 0.5,
+            color: 'black',
+            dashArray: '3'
+        }
+    }
+
+    function onOverStyleZone (e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 3,
+            color: 'black',
+            dashArray: '',
+            fillOpacity: 0.7,
+            opacity: 0.7
+        });
+
+        /*if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+         layer.bringToFront();
+         }*/
+
+        info.update(layer.feature.properties);
+    }
+
+    function resetStyleZone(e) {
+        club_locations.resetStyle(e.target);
+        info.update();
+    }
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeatureZone(feature, layer) {
+        layer.on({
+            mouseover: onOverStyleZone,
+            mouseout: resetStyleZone,
+            click: zoomToFeature
+        });
+    }
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    info.update = function (p) {
+        this._div.innerHTML = '<h4>Nombre de joueurs par région :</h4>' +  (p ?
+                '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' joueur(s)'
+                : 'Hover over a state');
+    };
+
+    info.addTo(map);
+
+    // Zoom on map
+    map.on('zoomend', function() {
+        if(view.value === "Player-Locations"){
+            if(map.getZoom() >= 5) {
+                if(!map.hasLayer(france)) {
+                    if(france == null) {
+                        $.get('data/geojson/players-france.geojson', function(data) {
+                            france = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(france);
+                            bounds = france.getBounds();
+                        });
+                    } else {
+                        map.addLayer(france);
+                        bounds = france.getBounds();
+                    }
+                }
+                if(!map.hasLayer(spain)) {
+                    if(spain == null) {
+                        $.get('data/geojson/players-espagne.geojson', function(data) {
+                            spain = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(spain);
+                            bounds = spain.getBounds();
+                        });
+                    } else {
+                        map.addLayer(spain);
+                        bounds = spain.getBounds();
+                    }
+                }
+                if(!map.hasLayer(germany)) {
+                    if(germany == null) {
+                        $.get('data/geojson/players-allemagne.geojson', function(data) {
+                            germany = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(germany);
+                            bounds = germany.getBounds();
+                        });
+                    } else {
+                        map.addLayer(germany);
+                        bounds = germany.getBounds();
+                    }
+                }
+                if(!map.hasLayer(italy)) {
+                    if(italy == null) {
+                        $.get('data/geojson/players-italie.geojson', function(data) {
+                            italy = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(italy);
+                            bounds = italy.getBounds();
+                        });
+                    } else {
+                        map.addLayer(italy);
+                        bounds = italy.getBounds();
+                    }
+                }
+                if(!map.hasLayer(england2)) {
+                    if(england2 == null) {
+                        $.get('data/geojson/players-angleterre2.geojson', function(data) {
+                            england2 = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(england2);
+                            bounds = england2.getBounds();
+                        });
+                    } else {
+                        map.addLayer(england2);
+                        bounds = england2.getBounds();
+                    }
+                }
+                if(!map.hasLayer(switzerland)) {
+                    if(switzerland == null) {
+                        $.get('data/geojson/players-suisse.geojson', function(data) {
+                            switzerland = new L.GeoJSON(data, {
+                                onEachFeature: onEachFeatureZone,
+                                style: basicStyleZone
+                            });
+                            map.addLayer(switzerland);
+                            bounds = switzerland.getBounds();
+                        });
+                    } else {
+                        map.addLayer(switzerland);
+                        bounds = switzerland.getBounds();
+                    }
+                }
+            }
+            else if(map.getZoom() < 5) {
+                removeCountryLayers();
+            }
+        }
+
+    });
+
+    function managePlayers (feature, layer){
         var point = new Array();
         point[0] = feature.properties.Latitude;
         point[1] = feature.properties.Longitude;
-        point[2] = 40;
+        point[2] = 40 * intensity;
         data.push(point);
+    }
+
+    function removeCountryLayers(){
+        if(map.hasLayer(france))
+            map.removeLayer(france);
+        if(map.hasLayer(spain))
+            map.removeLayer(spain);
+        if(map.hasLayer(germany))
+            map.removeLayer(germany);
+        if(map.hasLayer(italy))
+            map.removeLayer(italy);
+        if(map.hasLayer(england)&& view.value!="Player-Locations")
+            map.removeLayer(england);
+        if(map.hasLayer(england2))
+            map.removeLayer(england2);
+        if(map.hasLayer(switzerland))
+            map.removeLayer(switzerland);
     }
 
     function clubList(feature) {
