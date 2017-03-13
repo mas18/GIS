@@ -2,7 +2,8 @@ html {
     background:#f4f4f4
 }
 
-fullscreen-icon { background-image: url(../images/icon-fullscreen.png); }
+
+.leaflet-control-zoom-fullscreen, .fullscreen-icon { background-image: url(../images/icon-fullscreen.png); }
 .leaflet-retina .fullscreen-icon { background-image: url(../images/icon-fullscreen-2x.png); background-size: 26px 26px; }
 /* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */
 .leaflet-container:-webkit-full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }
