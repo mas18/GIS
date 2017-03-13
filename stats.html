@@ -152,6 +152,7 @@
 <script>
 
     // DISPLAY DIV
+    // This display different div when clicking on each button to filter the stat
     var $btns = $('.button').click(function() {
         if (this.id == 'all') {
             $('#parent > div').fadeIn(450);
@@ -164,7 +165,7 @@
     })
 
     // CLUB AGE -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the age of the club
     $.get('data/geojson/stade-complete.geojson', function(data) {
 
         var oldestClub = document.getElementById("oldestClub");
@@ -227,11 +228,13 @@
         youngestValues = [getAge(youngestValues[0]), getAge(youngestValues[1]), getAge(youngestValues[2]), getAge(youngestValues[3]), getAge(youngestValues[4]), getAge(youngestValues[5])];
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
 
+        // This function get the age from a year
         function getAge(year) {
             var date = new Date().getFullYear();
             return date - year;
         }
 
+        // This function calculates the average of a list of values
         function getAverage(average) {
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
@@ -240,6 +243,7 @@
             return getAge(Math.round(sum/average.length));
         }
 
+        // This function calculates the min and max values
         function getStatistics(average, country, position, value) {
             average.push(value.properties.Formed);
             if(value.properties.Formed < oldestValues[position]) {
@@ -301,7 +305,7 @@
     });
 
     // STADIUM CAPACITY -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the stadium capacity
     $.get('data/geojson/stade-complete.geojson', function(data) {
 
         var highestCapacity = document.getElementById("highestCapacity");
@@ -362,6 +366,7 @@
 
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
 
+        // This function calculates the average of a list of values
         function getAverage(average) {
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
@@ -370,6 +375,7 @@
             return Math.round(sum/average.length);
         }
 
+        // This function calculates the min and max values
         function getStatistics(average, country, position, value) {
             average.push(value.properties.Capacity);
             if(value.properties.Capacity > highestValues[position]) {
@@ -429,7 +435,7 @@
     });
 
     // PLAYERS AGE -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the age of the player
     $.get('data/geojson/players-complete.geojson', function(data) {
 
         var oldestPlayer = document.getElementById("oldestPlayer");
@@ -518,8 +524,10 @@
 
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
 
+        // This function get the age from a date of birth
         function getAge(dateString)
         {
+            // converting the date
             var year = "00";
             if(dateString.substring(6, 8) < 50)
                 year = "20";
@@ -527,6 +535,7 @@
                 year = "19";
             var newDate = year + dateString.substring(6, 8) + "-" + dateString.substring(3, 5) + "-" + dateString.substring(0, 2);
 
+            // get the age from the converted date
             var today = new Date();
             var birthDate = new Date(newDate);
             var age = today.getFullYear() - birthDate.getFullYear();
@@ -538,6 +547,7 @@
             return age;
         }
 
+        // This function calculates the average of a list of values
         function getAverage(average) {
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
@@ -546,6 +556,7 @@
             return Math.round(sum/average.length * 100) / 100;
         }
 
+        // This function calculates the min and max values
         function getStatistics(average, country, position, value) {
             average.push(getAge(value.properties.Date_of_Birth));
             if(getAge(value.properties.Date_of_Birth) > oldestValues[position]) {
@@ -605,7 +616,7 @@
     });
 
     // PLAYERS HEIGHT -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the size of the player
     $.get('data/geojson/players-complete.geojson', function(data) {
 
         var tallestPlayer = document.getElementById("tallestPlayer");
@@ -693,6 +704,7 @@
 
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
 
+        // This function calculates the average of a list of values
         function getAverage(average) {
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
@@ -701,6 +713,7 @@
             return Math.round(sum/average.length * 100) / 100;
         }
 
+        // This function calculates the min and max values
         function getStatistics(average, country, position, value) {
             if(value.properties.Height != null) {
                 average.push(value.properties.Height);
@@ -762,7 +775,7 @@
     });
 
     // PLAYERS WEIGHT -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the weight of the player
     $.get('data/geojson/players-complete.geojson', function(data) {
 
         var heaviestPlayer = document.getElementById("heaviestPlayer");
@@ -850,6 +863,7 @@
 
         averageValues = [getAverage(englandAverage), getAverage(franceAverage), getAverage(spainAverage), getAverage(italyAverage), getAverage(germanyAverage), getAverage(switzerlandAverage)];
 
+        // This function calculates the average of a list of values
         function getAverage(average) {
             var sum = 0;
             for(var i = 0; i < average.length; i++) {
@@ -858,6 +872,7 @@
             return Math.round(sum/average.length);
         }
 
+        // This function calculates the min and max values
         function getStatistics(average, country, position, value) {
             if(value.properties.Weight != null) {
                 average.push(value.properties.Weight);
@@ -919,7 +934,7 @@
     });
 
     // PLAYERS PER CHAMPIONSHIP -------------------------------------------------------------------------------------
-
+    // This get function does the stat for the player per championship
     $.get('data/geojson/players-complete.geojson', function(data) {
 
         var nbPlayer = document.getElementById("nbPlayer");
