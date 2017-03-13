@@ -186,6 +186,34 @@
     league.addEventListener('change', function(){
         cleanClubs();
         // Enable / disable Club selection
+
+    });
+
+    controlPanel.addEventListener('change', function(){
+        if(view.value != "Standard"){
+            league.firstElementChild.text = "Tous";
+            sel_clubs.firstElementChild.text = "Tous";
+        } else {
+            league.firstElementChild.text = "Aucun";
+            sel_clubs.firstElementChild.text = "Aucune";
+        }
+
+        if(view.value === "Player-Locations"){
+            sel_clubs.value='All';
+            sel_clubs.disabled=true;
+
+            league.value='All';
+            league.disabled=true;
+        } else {
+            league.disabled=false;
+            setClubs();
+        }
+
+        removeLayers();
+        getView();
+    });
+
+    function setClubs(){
         if(league.value === "All"){
             sel_clubs.value='All';
             sel_clubs.disabled=true;
@@ -199,20 +227,7 @@
             });
             insertClub();
         }
-    });
-
-    controlPanel.addEventListener('change', function(){
-        if(view.value != "Standard"){
-            league.firstElementChild.text = "Tous";
-            sel_clubs.firstElementChild.text = "Tous";
-        } else {
-            league.firstElementChild.text = "Aucun";
-            sel_clubs.firstElementChild.text = "Aucune";
-        }
-        removeLayers();
-        getView();
-    });
-
+    }
 
     function cleanClubs(){
         clubs = [];
@@ -251,6 +266,7 @@
         if(map.hasLayer(player)){
             player.remove();
         } else if(map.hasLayer(club_locations)){
+            info.remove();
             club_locations.remove();
             removeCountryLayers();
         } else if (map.hasLayer(heatmap)){
@@ -296,6 +312,21 @@
     function locationLayer(){
         map.addLayer(club_locations);
         map.addLayer(england);
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+        };
+
+        // method that we will use to update the control based on feature properties passed
+        info.update = function (p) {
+            this._div.innerHTML = '<h4>Nombre de joueurs par région :</h4>' +  (p ?
+                    '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' joueur(s)'
+                    : 'Hover over a state');
+        };
+
+        info.addTo(map);
     }
 
     function heatmapLayer(){
@@ -401,20 +432,7 @@
         });
     }
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function (p) {
-        this._div.innerHTML = '<h4>Nombre de joueurs par région :</h4>' +  (p ?
-                '<b>' + p.NAME + '</b><br />' + p.NUMPOINTS + ' joueur(s)'
-                : 'Hover over a state');
-    };
-
-    info.addTo(map);
 
     // Zoom on map
     map.on('zoomend', function() {

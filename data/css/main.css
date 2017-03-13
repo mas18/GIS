@@ -35,6 +35,10 @@ a {
     -webkit-transition:all .25s ease-in-out
 }
 
+select:disabled {
+    color: #ddd;
+}
+
 .inline-block {
     display:inline-block
 }
