@@ -144,7 +144,7 @@
         fullscreenControlOptions: {
             position: 'topleft'
         }
-    }).setView([46.368725, 7.312521], 4);
+    }).setView([46.368725, 7.312521], 2);
 
     // Controllers
     var controlPanel = document.getElementById('controller');
@@ -177,6 +177,10 @@
 
     // Zone info
     var info = L.control();
+
+    $().ready(function() {
+       map.options.minZoom = 2;
+    });
 
     // Listeners
     league.addEventListener('change', function(){
@@ -238,10 +242,6 @@
             onEachFeature: onEachFeatureZone,
             style: basicStyleZone
         });
-
-        bounds = club_locations.getBounds();
-        map.fitBounds(bounds);
-
     });
 
 

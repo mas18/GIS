@@ -165,6 +165,10 @@
         // Zone info
         var info = L.control();
 
+        $().ready(function(){
+           map.options.minZoom = 4;
+        });
+
         // Listeners
         controlPanel.addEventListener('change', function(){
             removeLayers();
