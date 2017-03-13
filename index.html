@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <title>Stade Map</title>
 
-    <!-- Bootstrap + Font Awesome + Main CSS -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="data/css/bootstrap.css" rel="stylesheet">
     <link href="data/css/main.css" rel="stylesheet">
-    <!-- customize this file if needed -->
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link rel="stylesheet" href="data/css/map.css"/>
@@ -64,7 +62,6 @@
                                 <label>
                                     Ligue:
                                     <select id="league">
-                                        <!-- make sure to encase string values in single quotes for valid sql -->
                                         <option value="">Aucun</option>
                                         <option value="All">Tous</option>
                                         <option value="England">Premier League</option>
@@ -79,7 +76,6 @@
                                 <label>
                                     Affichage:
                                     <select id="view">
-                                        <!-- make sure to encase string values in single quotes for valid sql -->
                                         <option value="Standard">Normal</option>
                                         <option value="Stade-Locations">Clubs par Région</option>
                                         <option value="Stade-Size">Grandeur des Stades</option>
@@ -171,12 +167,13 @@
 
         // Listeners
         controlPanel.addEventListener('change', function(){
+            // Disable option all if view "Stade-Locations" is set
             if(view.value === 'Stade-Locations'){
                 $("option[value='All']").attr("disabled", "disabled");
             } else {
                 $("option[value='All']").attr("disabled", false);
             }
-
+            // Disable option "Stade-Locations" if option "all" is set
             if(league.value === 'All'){
                 $("option[value='Stade-Locations']").attr("disabled", "disabled");
             } else {
@@ -186,7 +183,7 @@
             getView();
         });
 
-        // Functions
+        // Controlls
         function removeLayers(){
             if(map.hasLayer(clubs)){
                 clubs.remove();
@@ -220,6 +217,7 @@
             }
         }
 
+        // ---- STANDARD LAYER ---- //
         function standardLayer(){
             if(league.value != "All") {
                 clubs = L.geoJson(stadions, {
@@ -237,7 +235,18 @@
             map.fitBounds(bounds);
         }
 
+        // Set popup for standard and size layer
+        function clubPopup (feature, layer){
+            layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity);
+            layer.bindPopup("<span style='padding-top: 0; padding-bottom: 0'><b> "+ feature.properties.Club_Name + "</b></span>" +
+                "<hr style='margin-top: 5px; margin-bottom: 5px' />" +
+                "<span style='padding-top: 0; padding-bottom: 0'>Stade: " + feature.properties.Ground + " (" + feature.properties.Capacity + " Places)</span><br />" +
+                "<span style='padding-top: 0; padding-bottom: 0'>Fondé en " + feature.properties.Formed + "</span><br />");
+        }
+
+        // ---- LOCATION LAYER ---- //
         function locationLayer(){
+           // Get geojson-file from selected league
            switch(league.value) {
                 case "England":
                     $.get('data/geojson/stade-GBR.geojson', function(data) {
@@ -325,6 +334,75 @@
             info.addTo(map);
         }
 
+        // Set colors by number of points
+        function getColor(points) {
+            switch(points) {
+                case 0:
+                    return "#ffcfd3";
+                case 1:
+                    return "#ff5358";
+                case 2:
+                    return "#ff000e";
+                case 3:
+                    return "#cd0009";
+                case 4:
+                    return "#9b0009";
+                case 5:
+                    return "#770009";
+            }
+        }
+
+        // Handle mouseover, mouseout and click per zone
+        function onEachFeatureZone(feature, layer) {
+            layer.on({
+                mouseover: onOverStyleZone,
+                mouseout: resetStyleZone,
+                click: zoomToFeature
+            });
+        }
+
+        // Initialize zones
+        function basicStyleZone(feature) {
+            return {
+                fillColor: getColor(feature.properties.NUMPOINTS),
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.5,
+                color: 'black',
+                dashArray: '3'
+            }
+        }
+
+        // on hover
+        function onOverStyleZone (e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 3,
+                color: 'black',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+
+            info.update(layer.feature.properties);
+        }
+
+        // on mouseout
+        function resetStyleZone(e) {
+            club_locations.resetStyle(e.target);
+            info.update();
+        }
+
+        // on click
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds());
+        }
+
+        // ---- SIZE LAYER ---- //
         function sizeLayer(){
             if(league.value != "All") {
                 stade_sizes = L.geoJson(stadions, {
@@ -345,6 +423,23 @@
             map.fitBounds(bounds);
         }
 
+        // Set point for each stadium
+        function point(feature, latlng) {
+            var marker = new L.Circle(latlng, geojsonMarkerOptions = {
+                radius: 10,
+                weight: setSize(feature.properties.Capacity),
+                opacity: 0.5
+            });
+
+            return marker;
+        }
+
+        // Set point size regarding the capacity of the stadium
+        function setSize(capacity) {
+            return capacity / 10000 * 6;
+        }
+
+        // ---- HEATMAP LAYER ---- //
         function heatmapLayer(){
             data = [];
             if(league.value != "All") {
@@ -366,6 +461,7 @@
 
         }
 
+        // Set heatmap data points
         function manageClubs (feature, layer){
             var point = new Array();
             point[0] = feature.properties.Latitude;
@@ -373,91 +469,6 @@
             point[2] = 700;
             data.push(point);
         }
-
-        function point(feature, latlng) {
-            var marker = new L.Circle(latlng, geojsonMarkerOptions = {
-                radius: 10,
-                weight: setSize(feature.properties.Capacity),
-                opacity: 0.5
-            });
-
-            return marker;
-        }
-
-        function setSize(capacity) {
-            return capacity / 10000 * 6;
-        }
-
-        function clubPopup (feature, layer){
-            layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity);
-            layer.bindPopup("<span style='padding-top: 0; padding-bottom: 0'><b> "+ feature.properties.Club_Name + "</b></span>" +
-                "<hr style='margin-top: 5px; margin-bottom: 5px' />" +
-                "<span style='padding-top: 0; padding-bottom: 0'>Stade: " + feature.properties.Ground + " (" + feature.properties.Capacity + " Places)</span><br />" +
-                "<span style='padding-top: 0; padding-bottom: 0'>Fondé en " + feature.properties.Formed + "</span><br />");
-        }
-
-        function getColor(points) {
-            switch(points) {
-                case 0:
-                    return "#ffcfd3";
-                case 1:
-                    return "#ff5358";
-                case 2:
-                    return "#ff000e";
-                case 3:
-                    return "#cd0009";
-                case 4:
-                    return "#9b0009";
-                case 5:
-                    return "#770009";
-            }
-        }
-
-        function basicStyleZone(feature) {
-            return {
-                fillColor: getColor(feature.properties.NUMPOINTS),
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.5,
-                color: 'black',
-                dashArray: '3'
-            }
-        }
-
-        function onOverStyleZone (e) {
-            var layer = e.target;
-
-            layer.setStyle({
-                weight: 3,
-                color: 'black',
-                dashArray: '',
-                fillOpacity: 0.7
-            });
-
-            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                layer.bringToFront();
-            }
-
-            info.update(layer.feature.properties);
-        }
-
-        function resetStyleZone(e) {
-            club_locations.resetStyle(e.target);
-            info.update();
-        }
-
-        function zoomToFeature(e) {
-            map.fitBounds(e.target.getBounds());
-        }
-
-        function onEachFeatureZone(feature, layer) {
-            layer.on({
-                mouseover: onOverStyleZone,
-                mouseout: resetStyleZone,
-                click: zoomToFeature
-            });
-        }
-
-    </script>
+  </script>
 </body>
 </html>
