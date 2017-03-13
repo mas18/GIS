@@ -386,6 +386,14 @@
 
     }
 
+    function marker(feature, latlng) {
+        var marker = new L.Circle(latlng,{
+            radius: 15,
+            color: 'red'
+        });
+        return marker;
+    }
+
     function basicStyleZone(feature) {
         return {
             fillColor: getColor(feature.properties.NUMPOINTS),
@@ -566,6 +574,7 @@
     }
 
     function playerPopup(feature, layer){
+
         layer.bindPopup("<h4> "+ feature.properties.Name + "</h4>");
     }
 </script>

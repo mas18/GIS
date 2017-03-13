@@ -171,6 +171,17 @@
 
         // Listeners
         controlPanel.addEventListener('change', function(){
+            if(view.value === 'Stade-Locations'){
+                $("option[value='All']").attr("disabled", "disabled");
+            } else {
+                $("option[value='All']").attr("disabled", false);
+            }
+
+            if(league.value === 'All'){
+                $("option[value='Stade-Locations']").attr("disabled", "disabled");
+            } else {
+                $("option[value='Stade-Locations']").attr("disabled", false);
+            }
             removeLayers();
             getView();
         });
