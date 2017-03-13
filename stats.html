@@ -3,76 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <title>Statistiques</title>
+
+    <!-- Bootstrap + Font Awesome + Main CSS -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="data/css/bootstrap.css" rel="stylesheet">
+    <!-- customize this file if needed -->
+    <link href="data/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="data/css/stats.css"/>
+    <link rel="stylesheet" href="data/css/zoneInfo.css"/>
     <script src="data/js/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="data/js/jribbble.js"></script>
+    <script src="data/js/bootstrap.js"></script>
 </head>
 <body>
 
-<button class="active btn" id="all">Toutes les statistiques</button>
-<button class="btn" id="a">Âge des clubs</button>
-<button class="btn" id="b">Capacité des stades</button>
-<button class="btn" id="c">Âge des joueurs</button>
-<button class="btn" id="d">Taille des joueurs</button>
-<button class="btn" id="e">Poids des joueurs</button>
-<button class="btn" id="f">Nombre de joueurs</button>
+<div class="wrapper">
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="navbar">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle collapsed" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="index.html">Foot Stat</a>
+                    </div>
 
-<!-- An element with an id is needed for the jQuery -->
-<div id="parent">
-    <!-- The base class is the box. Categories are then given as accessory classes. Any div can be in more than one category -->
-    <div class="box a">
-        <div class="title">Âge des clubs</div>
-        <canvas id="oldestClub" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="youngestClub" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="averageClub" width="600" height="400" style="float:left;"></canvas>
-    </div>
-    <div class="box b">
-        <div class="title">Capacité des stades</div>
-        <canvas id="highestCapacity" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="lowestCapacity" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="averageCapacity" width="600" height="400" style="float:left;"></canvas>
-    </div>
-    <div class="box c">
-        <div class="title">Âge des joueurs</div>
-        <canvas id="oldestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="youngestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="averagePlayer" width="600" height="400" style="float:left;"></canvas>
-    </div>
-    <div class="box d">
-        <div class="title">Taille des joueurs</div>
-        <canvas id="tallestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="smallestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="averageSizePlayer" width="600" height="400" style="float:left;"></canvas>
-    </div>
-    <div class="box e">
-        <div class="title">Poids des joueurs</div>
-        <canvas id="heaviestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="lightestPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="averageWeightPlayer" width="600" height="400" style="float:left;"></canvas>
-    </div>
-    <div class="box f">
-        <div class="title">Nombre de joueurs</div>
-        <canvas id="nbPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="nbLocalPlayer" width="600" height="400" style="float:left;"></canvas>
-        <canvas id="nbForeignPlayer" width="600" height="400" style="float:left;"></canvas>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="index.html">Stade</a>
+                            </li>
+
+                            <li>
+                                <a href="players.html">Joueurs</a>
+                            </li>
+
+                            <li>
+                                <a href="stats.html">Statistiques</a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav social">
+                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                            <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                            <li><a href="#"> <i class="fa fa-github"></i> </a> </li>
+                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
+                            <li><a href="#"> <i class="fa fa-envelope"></i> </a></li>
+                        </ul>
+                    </div><!-- /.nav-collapse -->
+                </div><!-- /.navbar -->
+            </div>
+
+            <div class="row container-fluid mainContent">
+                <div class="col-md-12 col-lg-12">
+                    <button class="button activated" id="all">Toutes les statistiques</button>
+                    <button class="button" id="a">Âge des clubs</button>
+                    <button class="button" id="b">Capacité des stades</button>
+                    <button class="button" id="c">Âge des joueurs</button>
+                    <button class="button" id="d">Taille des joueurs</button>
+                    <button class="button" id="e">Poids des joueurs</button>
+                    <button class="button" id="f">Nombre de joueurs</button>
+
+                    <!-- An element with an id is needed for the jQuery -->
+                    <div class="container-fluid" id="parent">
+                        <!-- The base class is the graph. Categories are then given as accessory classes. Any div can be in more than one category -->
+                        <div class="graph a">
+                            <div class="title">Âge des clubs</div>
+                            <canvas id="oldestClub" width="600" height="400"></canvas>
+                            <canvas id="youngestClub" width="600" height="400"></canvas>
+                            <canvas id="averageClub" width="600" height="400"></canvas>
+                        </div>
+                        <div class="graph b">
+                            <div class="title">Capacité des stades</div>
+                            <canvas id="highestCapacity" width="600" height="400"></canvas>
+                            <canvas id="lowestCapacity" width="600" height="400"></canvas>
+                            <canvas id="averageCapacity" width="600" height="400"></canvas>
+                        </div>
+                        <div class="graph c">
+                            <div class="title">Âge des joueurs</div>
+                            <canvas id="oldestPlayer" width="600" height="400"></canvas>
+                            <canvas id="youngestPlayer" width="600" height="400"></canvas>
+                            <canvas id="averagePlayer" width="600" height="400"></canvas>
+                        </div>
+                        <div class="graph d">
+                            <div class="title">Taille des joueurs</div>
+                            <canvas id="tallestPlayer" width="600" height="400"></canvas>
+                            <canvas id="smallestPlayer" width="600" height="400"></canvas>
+                            <canvas id="averageSizePlayer" width="600" height="400"></canvas>
+                        </div>
+                        <div class="graph e">
+                            <div class="title">Poids des joueurs</div>
+                            <canvas id="heaviestPlayer" width="600" height="400"></canvas>
+                            <canvas id="lightestPlayer" width="600" height="400"></canvas>
+                            <canvas id="averageWeightPlayer" width="600" height="400"></canvas>
+                        </div>
+                        <div class="graph f">
+                            <div class="title">Nombre de joueurs</div>
+                            <canvas id="nbPlayer" width="600" height="400"></canvas>
+                            <canvas id="nbLocalPlayer" width="600" height="400"></canvas>
+                            <canvas id="nbForeignPlayer" width="600" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="row grid-list-wrapper no-gutter-space" id="shots"></div>
     </div>
 </div>
+
+<footer>
+    <div class="container">
+        <nav class="nav-footer">
+            <ul>
+                <li>
+                    <a href="#">About</a>
+                </li>
+
+                <li>
+                    <a href="#">Blog</a>
+                </li>
+
+                <li>
+                    <a href="#">Resume</a>
+                </li>
+
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                <li><a href="#"> <i class="fa fa-github"></i> </a> </li>
+                <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
+                <li><a href="#"> <i class="fa fa-envelope"></i> </a></li>
+            </ul>
+
+            <p class="credits text-center">&copy; All Rights Reserved 2015</p>
+        </nav>
+    </div>
+
+</footer>
 
 <script>
 
     // DISPLAY DIV
-    var $btns = $('.btn').click(function() {
+    var $btns = $('.button').click(function() {
         if (this.id == 'all') {
             $('#parent > div').fadeIn(450);
         } else {
             var $el = $('.' + this.id).fadeIn(450);
             $('#parent > div').not($el).hide();
         }
-        $btns.removeClass('active');
-        $(this).addClass('active');
+        $btns.removeClass('activated');
+        $(this).addClass('activated');
     })
 
     // CLUB AGE -------------------------------------------------------------------------------------
