@@ -6,9 +6,10 @@
 
     <!-- Bootstrap + Font Awesome + Main CSS -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="data/css/main.css" rel="stylesheet">
     <link href="data/css/bootstrap.css" rel="stylesheet">
     <!-- customize this file if needed -->
-    <link href="data/css/main.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link rel="stylesheet" href="data/css/map.css"/>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
@@ -34,7 +35,7 @@
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="index.html">Stade</a>
+                                    <a class="active" href="index.html">Stade</a>
                                 </li>
 
                                 <li>
@@ -390,6 +391,10 @@
 
         function clubPopup (feature, layer){
             layer.bindPopup("<h4> "+ feature.properties.Club_Name + "</h4>" +  feature.properties.Ground + " " + feature.properties.Capacity);
+            layer.bindPopup("<span style='padding-top: 0; padding-bottom: 0'><b> "+ feature.properties.Club_Name + "</b></span>" +
+                "<hr style='margin-top: 5px; margin-bottom: 5px' />" +
+                "<span style='padding-top: 0; padding-bottom: 0'>Stade: " + feature.properties.Ground + " (" + feature.properties.Capacity + " Places)</span><br />" +
+                "<span style='padding-top: 0; padding-bottom: 0'>Fondé en " + feature.properties.Formed + "</span><br />");
         }
 
         function getColor(points) {
